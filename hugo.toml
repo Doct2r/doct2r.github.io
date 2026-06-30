@@ -1,4 +1,4 @@
-baseURL = 'https://doct2r.github.io/Hugo_Blog_260630/'
+baseURL = 'https://doct2r.github.io/'
 languageCode = 'ko'
 title = 'My Blog'
 theme = 'PaperMod'
