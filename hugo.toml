@@ -1,6 +1,6 @@
 baseURL = 'https://doct2r.github.io/'
 languageCode = 'ko'
-title = 'My Blog'
+title = "Doct2r's Blog"
 theme = 'PaperMod'
 [pagination]
   pagerSize = 10
@@ -16,7 +16,7 @@ buildExpired = false
 
 [params]
   env = 'production'
-  title = 'My Blog'
+  title = "Doct2r's Blog"
   description = ''
   keywords = []
   author = 'Me'
