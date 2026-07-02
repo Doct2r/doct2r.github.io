@@ -1,6 +1,6 @@
 ---
 title: "개발자의 발표 시즌 — 각 기업의 컨퍼런스 캘린더와 특징"
-date: 2026-07-02
+date: 2026-07-02T23:00:00+09:00
 draft: false
 tags: ["컨퍼런스", "WWDC", "Google I/O", "Build", "AWS", "개발자"]
 categories: ["개발문화"]

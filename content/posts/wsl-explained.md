@@ -1,6 +1,6 @@
 ---
 title: "WSL — Windows 안의 Linux, 왜 만들었고 실제로 쓸 만한가"
-date: 2026-07-02
+date: 2026-07-02T22:00:00+09:00
 draft: false
 tags: ["WSL", "Windows", "Linux", "개발환경", "Microsoft"]
 categories: ["운영체제"]

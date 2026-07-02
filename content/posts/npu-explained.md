@@ -1,6 +1,6 @@
 ---
 title: "NPU — AI 이전부터 있었던 전용 연산 칩의 역사"
-date: 2026-07-02
+date: 2026-07-02T17:30:00+09:00
 draft: false
 tags: ["NPU", "AI", "하드웨어", "온디바이스", "Apple Neural Engine", "CUDA"]
 categories: ["하드웨어"]

@@ -1,6 +1,6 @@
 ---
 title: "CPU/AP 아키텍처 — ISA부터 세대 구분까지"
-date: 2026-07-02
+date: 2026-07-02T16:00:00+09:00
 draft: false
 tags: ["CPU", "ARM", "x86", "RISC-V", "아키텍처", "Apple Silicon"]
 categories: ["하드웨어"]

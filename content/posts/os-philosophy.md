@@ -1,6 +1,6 @@
 ---
 title: "각 상용 OS의 이념 — 왜 이렇게 만들어졌는가"
-date: 2026-07-02
+date: 2026-07-02T15:00:00+09:00
 draft: false
 tags: ["Windows", "macOS", "Linux", "Android", "iOS", "운영체제"]
 categories: ["운영체제"]

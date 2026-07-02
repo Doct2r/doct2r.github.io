@@ -1,6 +1,6 @@
 ---
 title: "WSA의 죽음 — Windows에서 Android가 실패한 이유"
-date: 2026-07-02
+date: 2026-07-02T22:30:00+09:00
 draft: false
 tags: ["WSA", "Windows", "Android", "Microsoft", "실패사례"]
 categories: ["운영체제"]

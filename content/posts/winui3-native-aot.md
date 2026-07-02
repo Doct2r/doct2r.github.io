@@ -1,6 +1,6 @@
 ---
 title: "WinUI3를 바이너리화 — 과연 MFC만큼의 장점이 나오는가?"
-date: 2026-07-02
+date: 2026-07-02T11:00:00+09:00
 draft: false
 tags: ["WinUI3", "Native AoT", "Windows App SDK", "C#", ".NET"]
 categories: ["Windows 개발"]

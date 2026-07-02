@@ -1,6 +1,6 @@
 ---
 title: "데이터베이스란 — 레지스트리도 DB인가, 엑셀도 DB인가"
-date: 2026-07-02
+date: 2026-07-02T19:00:00+09:00
 draft: false
 tags: ["데이터베이스", "SQL", "NoSQL", "DBMS", "레지스트리"]
 categories: ["프로그래밍"]

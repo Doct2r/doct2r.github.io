@@ -1,6 +1,6 @@
 ---
 title: "각 OS별 프로세스 간 통신(IPC) 방식 총정리"
-date: 2026-07-02
+date: 2026-07-02T11:30:00+09:00
 draft: false
 tags: ["IPC", "Windows", "macOS", "Linux", "시스템 프로그래밍"]
 categories: ["시스템"]

@@ -1,6 +1,6 @@
 ---
 title: "GPU — 픽셀을 그리던 칩이 AI 산업의 심장이 된 이유"
-date: 2026-07-02
+date: 2026-07-02T17:00:00+09:00
 draft: false
 tags: ["GPU", "CUDA", "AI", "딥러닝", "NVIDIA", "그래픽"]
 categories: ["하드웨어"]

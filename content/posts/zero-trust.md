@@ -1,6 +1,6 @@
 ---
 title: "제로 트러스트 — 왜 나왔고, 어떻게 작동하는가"
-date: 2026-07-02
+date: 2026-07-02T14:00:00+09:00
 draft: false
 tags: ["제로 트러스트", "보안", "Zero Trust", "IAM", "네트워크 보안"]
 categories: ["보안"]

@@ -1,6 +1,6 @@
 ---
 title: "Hugo — 정적 사이트 생성기의 현재와 생태계 전체"
-date: 2026-07-02
+date: 2026-07-02T20:30:00+09:00
 draft: false
 tags: ["Hugo", "정적사이트", "SSG", "블로그", "웹개발", "JAMstack"]
 categories: ["개발도구"]

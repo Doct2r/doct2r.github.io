@@ -1,6 +1,6 @@
 ---
 title: "VPN — 실체와 표준, 그리고 왜 주목해야 하는가"
-date: 2026-07-02
+date: 2026-07-02T13:30:00+09:00
 draft: false
 tags: ["VPN", "보안", "네트워크", "WireGuard", "OpenVPN"]
 categories: ["네트워크"]

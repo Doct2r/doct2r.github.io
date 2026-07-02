@@ -1,6 +1,6 @@
 ---
 title: "Windows의 역사 — 두 혈통의 충돌, 그리고 퐁당퐁당의 법칙"
-date: 2026-07-02
+date: 2026-07-02T21:00:00+09:00
 draft: false
 tags: ["Windows", "역사", "운영체제", "Microsoft", "NT커널", "커널"]
 categories: ["운영체제"]

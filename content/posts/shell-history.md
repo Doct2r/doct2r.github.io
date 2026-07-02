@@ -1,6 +1,6 @@
 ---
 title: "쉘(Shell)이란 — 진짜 껍질에서 온 이름, bash부터 PowerShell까지"
-date: 2026-07-02
+date: 2026-07-02T21:30:00+09:00
 draft: false
 tags: ["쉘", "bash", "zsh", "PowerShell", "CLI", "운영체제", "터미널"]
 categories: ["운영체제"]

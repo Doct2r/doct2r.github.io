@@ -1,6 +1,6 @@
 ---
 title: "소켓 통신 — 언제 쓰고 언제 피해야 하나"
-date: 2026-07-02
+date: 2026-07-02T13:00:00+09:00
 draft: false
 tags: ["소켓", "네트워크", "TCP", "UDP", "WebSocket"]
 categories: ["네트워크"]

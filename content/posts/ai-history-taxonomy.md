@@ -1,6 +1,6 @@
 ---
 title: "AI · ML · 딥러닝 · LLM — 같은 건가, 다른 건가"
-date: 2026-07-02
+date: 2026-07-02T18:30:00+09:00
 draft: false
 tags: ["AI", "머신러닝", "딥러닝", "LLM", "인공지능", "역사"]
 categories: ["AI"]

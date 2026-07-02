@@ -1,6 +1,6 @@
 ---
 title: "메모리의 모든 것 — 종류, 계층, 규격까지"
-date: 2026-07-02
+date: 2026-07-02T16:30:00+09:00
 draft: false
 tags: ["메모리", "RAM", "NAND", "DDR", "캐시", "HBM"]
 categories: ["하드웨어"]

@@ -1,6 +1,6 @@
 ---
 title: "WPF는 언제 써야만 하는가?"
-date: 2026-07-02
+date: 2026-07-02T12:00:00+09:00
 draft: false
 tags: ["WPF", "Windows", "C#", ".NET", "UI 프레임워크"]
 categories: ["Windows 개발"]
