@@ -208,6 +208,85 @@ openvpn --config server.conf
 
 ---
 
+### strongSwan
+
+- **라이선스**: GPLv2
+- **언어**: C
+- **플랫폼**: Linux, macOS, Windows, Android, iOS
+- **특징**: Linux IPsec의 사실상 표준, IKEv1/IKEv2 완전 지원, 엔터프라이즈 급 인증 체계
+
+strongSwan은 IPsec 구현체 중 가장 널리 쓰이는 오픈소스다. Android 내장 IPsec VPN 클라이언트가 strongSwan 기반이며, 대부분의 Linux 배포판 패키지 저장소에 포함되어 있다. Cisco ASA, Juniper, Palo Alto 같은 상용 장비와의 Site-to-Site IPsec 연동에서 사실상 표준 리눅스 측 구현체로 통한다.
+
+IKEv2 지원이 완성도 높고, EAP(Extensible Authentication Protocol) 기반 인증(EAP-TLS, EAP-MSCHAPv2 등)을 지원해 기업 Active Directory 연동이 가능하다.
+
+```bash
+# 설치 (Ubuntu/Debian)
+apt install strongswan strongswan-pki
+
+# PKI 구성 — CA 인증서 생성
+pki --gen --type rsa --size 4096 --outform pem > ca-key.pem
+pki --self --ca --lifetime 3650 \
+    --in ca-key.pem --type rsa \
+    --dn "CN=My VPN CA" --outform pem > ca-cert.pem
+
+# 서버 인증서 생성
+pki --gen --type rsa --size 2048 --outform pem > server-key.pem
+pki --pub --in server-key.pem --type rsa | \
+    pki --issue --lifetime 1825 \
+    --cacert ca-cert.pem --cakey ca-key.pem \
+    --dn "CN=vpn.example.com" \
+    --san vpn.example.com --flag serverAuth \
+    --outform pem > server-cert.pem
+```
+
+```ini
+# /etc/ipsec.conf — IKEv2 서버 설정 예시
+config setup
+    charondebug="ike 1, knl 1, cfg 0"
+
+conn ikev2-vpn
+    auto=add
+    compress=no
+    type=tunnel
+    keyexchange=ikev2
+    ike=aes256-sha256-modp2048!
+    esp=aes256-sha256!
+    left=%any
+    leftid=@vpn.example.com
+    leftcert=server-cert.pem
+    leftsendcert=always
+    leftsubnet=0.0.0.0/0
+    right=%any
+    rightid=%any
+    rightauth=eap-mschapv2
+    rightdns=8.8.8.8
+    rightsourceip=10.10.10.0/24
+    rightsendcert=never
+    eap_identity=%identity
+```
+
+```bash
+# 서비스 시작
+systemctl start strongswan
+ipsec statusall  # 연결 상태 확인
+ipsec reload     # 설정 재로드
+```
+
+**OpenVPN과의 차이점**
+
+| | strongSwan (IPsec) | OpenVPN |
+|---|---|---|
+| 동작 레이어 | 3계층 (커널) | 4계층 (유저스페이스) |
+| 속도 | 빠름 (커널 처리) | 상대적으로 느림 |
+| 방화벽 우회 | 어려움 (UDP 500/4500) | 쉬움 (TCP/UDP 443) |
+| OS 기본 지원 | Windows, iOS, macOS 내장 | 별도 클라이언트 필요 |
+| 설정 복잡도 | 높음 | 높음 |
+| 기업 장비 연동 | 최적 | 제한적 |
+
+Windows, iOS, macOS는 IPsec/IKEv2 클라이언트를 OS에 내장하고 있어 strongSwan 서버를 구성하면 별도 앱 설치 없이 바로 연결할 수 있다는 게 큰 장점이다.
+
+---
+
 ### Tailscale
 
 - **라이선스**: BSD (클라이언트 오픈소스), 서버는 비공개
