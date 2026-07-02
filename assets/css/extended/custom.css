@@ -1,0 +1,57 @@
+/* Brand colors from logo: Green #308572 / Maroon #883535 */
+
+:root {
+    --accent:        #308572;
+    --accent-light:  #3fa08a;
+    --accent-maroon: #883535;
+}
+
+[data-theme="dark"] {
+    --accent:        #4ab89d;
+    --accent-light:  #5ecdb1;
+    --accent-maroon: #b05050;
+}
+
+/* 링크 */
+a:hover {
+    color: var(--accent);
+}
+
+/* 포스트 목록 제목 hover */
+.entry-header h2:hover,
+.post-title:hover {
+    color: var(--accent);
+}
+
+/* 태그 hover */
+.post-tags a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: transparent;
+}
+
+/* 현재 메뉴 항목 */
+.menu .active {
+    color: var(--accent);
+}
+
+/* TOC 링크 hover */
+.toc a:hover {
+    color: var(--accent);
+}
+
+/* 소셜 아이콘 hover */
+.social-icons a:hover svg {
+    fill: var(--accent);
+}
+
+/* 코드 블록 상단 바 */
+.highlight pre {
+    border-left: 3px solid var(--accent);
+}
+
+/* 읽기 시간 / 메타 구분선 */
+.post-meta .i18n_list li::before,
+.breadcrumbs a:hover {
+    color: var(--accent);
+}
