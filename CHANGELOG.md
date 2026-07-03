@@ -5,6 +5,22 @@
 
 ---
 
+## [2026-07-03] 파비콘 수정: 커스텀 파비콘 적용
+
+### 변경 이유
+- CleanWhite 테마 기본 파비콘(`img/favicon.ico`)이 탭에 표시되는 문제
+- 프로젝트 고유 파비콘 파일(`favicon-16x16.png`, `favicon-32x32.png` 등) 미적용
+
+### 변경 내용
+- `layouts/_partials/head.html` 오버라이드 추가
+- 테마의 `<link rel="shortcut icon" href="img/favicon.ico">` 단일 선언을 아래로 교체:
+  - `favicon.ico` (기본)
+  - `favicon-16x16.png` (탭용)
+  - `favicon-32x32.png` (HiDPI)
+  - `apple-touch-icon.png` (iOS 홈화면)
+
+---
+
 ## [2026-07-03] 테마 변경: PaperMod → CleanWhite
 
 ### 변경 이유
