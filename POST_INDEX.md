@@ -103,6 +103,7 @@
 | `electron-explained.md` | Electron — 왜 나왔고, 무엇이 문제이며, 지금은 어디에 쓰는가 | Electron 등장 배경, Chromium+Node.js 구조, 메모리·크기 한계, VS Code·Slack·Discord 사례, Tauri·Flutter·CEF 비교 |
 | `tauri-explained.md` | Tauri — Electron의 대안인가, 진짜 후계자인가 | OS WebView 사용 구조, 크기·메모리·보안 실질적 장점, Capabilities 권한 시스템, 생태계 현황, Wails·Flutter·CEF 비교, 언제 선택할지 |
 | `gui-crossplatform.md` | 크로스 플랫폼 GUI — 통일된 사용성을 만들 수 있는가 | 네이티브 GUI 근본 차이, Flutter·Qt·MAUI·Electron 트레이드오프, 추상화 누수 |
+| `mobile-crossplatform.md` | 모바일 크로스 플랫폼 — 하나의 코드로 iOS와 Android를 잡을 수 있는가 | WebView/JS브릿지/자체렌더링/로직공유 4가지 철학. React Native·Flutter·KMP·Capacitor·MAUI 비교, 플랫폼별 선택 기준 |
 | `mfc-to-winui3.md` | MFC→WinUI3 마이그레이션 — 프로세스 분리가 답인 이유 | MFC↔C# 연동 시 Native AoT 강제, WinUI3 AoT 미지원 문제, 프로세스 분리 해법 |
 | `release-cycle.md` | 개발 주기 — 개발→테스트→릴리즈가 전부가 아닌 이유 | 플랫폼·앱 유형별 릴리즈 주기 차이. CI/CD·핫픽스·롤백 전략 |
 
