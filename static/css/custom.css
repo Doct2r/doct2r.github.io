@@ -1,26 +1,32 @@
-/* ─── 헤더 그라디언트 (이미지 대체) ─── */
+/*
+ * 퍼스널 컬러 (테마 불문 유지)
+ *   #24826E — 딥 틸 그린 (1번색)
+ *   #882426 — 딥 마론 (2번색)
+ */
+
+/* ─── 헤더 그라디언트 ─── */
 header.intro-header {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%) !important;
+    background: linear-gradient(135deg, #24826E 0%, #55303a 50%, #882426 100%) !important;
 }
 
 /* ─── 브랜드 강조색 ─── */
 a:hover,
 .post-preview:hover .post-title,
 .tag-list a:hover {
-    color: #4ab89d;
+    color: #24826E;
 }
 
 .navbar-custom .navbar-brand:hover,
 .navbar-custom .nav li a:hover {
-    color: #4ab89d !important;
+    color: #24826E !important;
 }
 
 /* ─── 코드 블록 좌측 라인 ─── */
 .highlight pre {
-    border-left: 3px solid #308572;
+    border-left: 3px solid #882426;
 }
 
 /* ─── 다크모드 헤더 그라디언트 ─── */
 [data-theme="dark"] header.intro-header {
-    background: linear-gradient(135deg, #0d0d1a 0%, #0a1020 50%, #071830 100%) !important;
+    background: linear-gradient(135deg, #1a5a4d 0%, #3d1f25 50%, #5e1a1c 100%) !important;
 }
