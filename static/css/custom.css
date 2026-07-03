@@ -1,0 +1,26 @@
+/* ─── 헤더 그라디언트 (이미지 대체) ─── */
+header.intro-header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%) !important;
+}
+
+/* ─── 브랜드 강조색 ─── */
+a:hover,
+.post-preview:hover .post-title,
+.tag-list a:hover {
+    color: #4ab89d;
+}
+
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .nav li a:hover {
+    color: #4ab89d !important;
+}
+
+/* ─── 코드 블록 좌측 라인 ─── */
+.highlight pre {
+    border-left: 3px solid #308572;
+}
+
+/* ─── 다크모드 헤더 그라디언트 ─── */
+[data-theme="dark"] header.intro-header {
+    background: linear-gradient(135deg, #0d0d1a 0%, #0a1020 50%, #071830 100%) !important;
+}
