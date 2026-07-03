@@ -100,6 +100,7 @@
 | `aot-interpreter-jit.md` | AoT·인터프리터·JIT — 코드는 어떻게 실행되는가 | 코드 실행 방식 3가지의 원리·성능·트레이드오프 |
 | `app-advancement.md` | 앱 고도화의 방향성 | 앱 성숙도 단계별 우선순위. 유형(소비자·기업·개발도구·게임)별 고도화 방향 |
 | `database-explained.md` | 데이터베이스란 — 레지스트리도 DB인가 | DB의 정의 범위·SQL/NoSQL 구분·적합 사용 시나리오 |
+| `electron-explained.md` | Electron — 왜 나왔고, 무엇이 문제이며, 지금은 어디에 쓰는가 | Electron 등장 배경, Chromium+Node.js 구조, 메모리·크기 한계, VS Code·Slack·Discord 사례, Tauri·Flutter·CEF 비교 |
 | `gui-crossplatform.md` | 크로스 플랫폼 GUI — 통일된 사용성을 만들 수 있는가 | 네이티브 GUI 근본 차이, Flutter·Qt·MAUI·Electron 트레이드오프, 추상화 누수 |
 | `mfc-to-winui3.md` | MFC→WinUI3 마이그레이션 — 프로세스 분리가 답인 이유 | MFC↔C# 연동 시 Native AoT 강제, WinUI3 AoT 미지원 문제, 프로세스 분리 해법 |
 | `release-cycle.md` | 개발 주기 — 개발→테스트→릴리즈가 전부가 아닌 이유 | 플랫폼·앱 유형별 릴리즈 주기 차이. CI/CD·핫픽스·롤백 전략 |
