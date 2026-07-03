@@ -101,6 +101,8 @@
 | `app-advancement.md` | 앱 고도화의 방향성 | 앱 성숙도 단계별 우선순위. 유형(소비자·기업·개발도구·게임)별 고도화 방향 |
 | `database-explained.md` | 데이터베이스란 — 레지스트리도 DB인가 | DB의 정의 범위·SQL/NoSQL 구분·적합 사용 시나리오 |
 | `electron-explained.md` | Electron — 왜 나왔고, 무엇이 문제이며, 지금은 어디에 쓰는가 | Electron 등장 배경, Chromium+Node.js 구조, 메모리·크기 한계, VS Code·Slack·Discord 사례, Tauri·Flutter·CEF 비교 |
+| `flutter-explained.md` | Flutter — 플랫폼 위젯을 버리고 직접 그리는 선택 | Impeller 렌더링 구조, Widget/Element/RenderObject 3트리, Dart null safety, 상태관리(Riverpod/BLoC), Google Pay·Alibaba·BMW 사례 |
+| `react-native-explained.md` | React Native — 페이스북이 HTML5를 포기한 날부터 시작된 이야기 | 구 아키텍처(Bridge) vs 새 아키텍처(JSI/Fabric), Expo 생태계, Airbnb 이탈 사례 분석, Meta·Shopify·Microsoft 사용 현황 |
 | `tauri-explained.md` | Tauri — Electron의 대안인가, 진짜 후계자인가 | OS WebView 사용 구조, 크기·메모리·보안 실질적 장점, Capabilities 권한 시스템, 생태계 현황, Wails·Flutter·CEF 비교, 언제 선택할지 |
 | `gui-crossplatform.md` | 크로스 플랫폼 GUI — 통일된 사용성을 만들 수 있는가 | 네이티브 GUI 근본 차이, Flutter·Qt·MAUI·Electron 트레이드오프, 추상화 누수 |
 | `mobile-crossplatform.md` | 모바일 크로스 플랫폼 — 하나의 코드로 iOS와 Android를 잡을 수 있는가 | WebView/JS브릿지/자체렌더링/로직공유 4가지 철학. React Native·Flutter·KMP·Capacitor·MAUI 비교, 플랫폼별 선택 기준 |
