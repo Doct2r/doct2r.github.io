@@ -5,6 +5,41 @@
 
 ---
 
+## [2026-07-03] 배포 날짜 처리 수정: --buildFuture 추가
+
+### 변경 이유
+- 게임 관련 포스트 3개(아타리 쇼크, 게임산업 구조 변화, 소니 플레이스테이션)가 검색에서 누락
+- 포스트 날짜가 KST 오후(T14:00~16:00)로 설정됐는데, GitHub Actions는 UTC 기준 빌드
+- `buildFuture = false` 설정에 의해 UTC 기준 미래 시각 포스트가 빌드에서 제외됨
+- 빌드에서 제외된 포스트는 pagefind 인덱싱도 안 돼 검색 불가
+
+### 변경 내용
+- `.github/workflows/deploy.yml` 빌드 명령에 `--buildFuture` 추가
+- `date` 필드는 홈페이지 정렬 순서 용도로만 사용, KST/UTC 무관하게 모든 비-draft 포스트 배포
+
+### 참고
+- 포스팅 시 날짜는 KST 기준으로 자유롭게 작성 가능
+- 시간대나 미래 날짜 여부에 관계없이 `draft: false`면 배포됨
+
+---
+
+## [2026-07-03] 검색·카테고리·태그·사이드바 기능 수정
+
+### 변경 이유
+- CleanWhite 테마가 내부적으로 `Type: "post"` / `Section: "post"` (단수)를 하드코딩
+- 이 블로그의 콘텐츠 타입은 `content/posts/`라 `"posts"` (복수) → 카테고리·태그 페이지 빈 상태
+- 사이드바 LAST POSTS 섹션도 동일 문제로 비어있었음
+- 검색 페이지(`/search/`)가 없어 404, pagefind 인덱싱 미설정
+
+### 변경 내용
+- `layouts/_partials/category.html` 오버라이드: `Section "post"` → `"posts"`
+- `layouts/_partials/sidebar.html` 오버라이드: `Type "post"` → `"posts"` (LAST POSTS 섹션)
+- `content/search/_index.md` 생성: `/search/` URL 활성화
+- `.github/workflows/deploy.yml`에 `npx pagefind --source public` 추가 (검색 인덱싱)
+- `hugo.toml`: `featured_condition_size = 1` → `0` (태그 1개 포스트도 사이드바 표시)
+
+---
+
 ## [2026-07-03] 파비콘 수정: 커스텀 파비콘 적용
 
 ### 변경 이유
