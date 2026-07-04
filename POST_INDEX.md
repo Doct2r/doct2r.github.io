@@ -115,6 +115,7 @@
 |------|------|---------------------------|
 | `cpu-architecture.md` | CPU/AP 아키텍처 — ISA부터 세대 구분까지 | CPU 설계 철학(x86·ARM·RISC-V), Apple Silicon 전환, 세대별 특성 |
 | `memory-types.md` | 메모리의 모든 것 — 종류, 계층, 규격까지 | RAM·NAND·캐시·HBM 등 메모리 종류·계층 구조·규격 차이 |
+| `vr-ar-xr.md` | VR·AR·XR — 눈에 쓰는 컴퓨터, 60년의 역사와 다음 플랫폼 | VR/AR/MR/XR 용어 구분, 1차·2차 웨이브 역사(Virtual Boy·Google Glass·Oculus), Quest·Vision Pro·스마트글래스 사업 전략 비교, 산업 지도, 한계와 전망 |
 
 ### Windows 개발
 
