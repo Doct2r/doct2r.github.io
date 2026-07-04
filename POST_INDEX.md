@@ -46,6 +46,9 @@
 | `game-industry-evolution.md` | 게임 산업의 구조 변화 — 왜 기업은 유저에게서 빼앗는가 | 게임 산업 역사적 구조 변화. GaaS·배틀패스·가챠의 수익 메커니즘 |
 | `open-source-reality.md` | 오픈소스 — 공짜도 아니고, 무주공산도 아니다 | 오픈소스 라이선스 체계·지속가능성·기업의 오픈소스 활용 구조 |
 | `sony-playstation-strategy.md` | 소니 플레이스테이션 — 무엇을 지향하고, 어디서 잘못됐는가 | 소니/PS GaaS 피벗 실패, 콩코드 참사, 라오어2 사태, 기업 방관의 구조적 원인 |
+| `google-history.md` | 구글 — 차고에서 시작해 지주회사가 되기까지 | 창업(PageRank·BackRub)부터 AdWords·IPO·주요 인수·Alphabet 지주회사 전환·리더십 승계까지 연대기 |
+| `google-business.md` | 구글 — 검색 회사에서 벗어나려는 광고 회사 | 현재 매출 구조(광고 의존도)·Google Cloud 현황·AI(Gemini) 경쟁과 검색 자기잠식 딜레마·반독점 소송·Waymo 상업화·인력 긴축 |
+| `google-graveyard.md` | 구글 — 나온 지 얼마 안 됐는데 사라진 것들의 목록 | 종료된 프로젝트 총정리(Orkut·Wave·Reader·Stadia·Loon 등)와 반복되는 실패 패턴 분석 |
 
 ### 개발문화
 
@@ -116,6 +119,7 @@
 | `cpu-architecture.md` | CPU/AP 아키텍처 — ISA부터 세대 구분까지 | CPU 설계 철학(x86·ARM·RISC-V), Apple Silicon 전환, 세대별 특성 |
 | `memory-types.md` | 메모리의 모든 것 — 종류, 계층, 규격까지 | RAM·NAND·캐시·HBM 등 메모리 종류·계층 구조·규격 차이 |
 | `vr-ar-xr.md` | VR·AR·XR — 눈에 쓰는 컴퓨터, 60년의 역사와 다음 플랫폼 | VR/AR/MR/XR 용어 구분, 1차·2차 웨이브 역사(Virtual Boy·Google Glass·Oculus), Quest·Vision Pro·스마트글래스 사업 전략 비교, 산업 지도, 한계와 전망 |
+| `google-devices.md` | 구글의 하드웨어 — 소프트웨어 회사가 기기를 만드는 이유 | Nexus→Pixel 전환, Tensor 자체 실리콘, Nest·Chromecast·Wifi 등 스마트홈 라인, Daydream·Stadia 컨트롤러 등 실제 출시 기기 계보 |
 
 ### Windows 개발
 
