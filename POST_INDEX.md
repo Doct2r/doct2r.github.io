@@ -49,6 +49,7 @@
 | `google-history.md` | 구글 — 차고에서 시작해 지주회사가 되기까지 | 창업(PageRank·BackRub)부터 AdWords·IPO·주요 인수·Alphabet 지주회사 전환·리더십 승계까지 연대기 |
 | `google-business.md` | 구글 — 검색 회사에서 벗어나려는 광고 회사 | 현재 매출 구조(광고 의존도)·Google Cloud 현황·AI(Gemini) 경쟁과 검색 자기잠식 딜레마·반독점 소송·Waymo 상업화·인력 긴축 |
 | `google-graveyard.md` | 구글 — 나온 지 얼마 안 됐는데 사라진 것들의 목록 | 종료된 프로젝트 총정리(Orkut·Wave·Reader·Stadia·Loon 등)와 반복되는 실패 패턴 분석 |
+| `web-advertising.md` | 웹 광고 — 배너 하나에서 시작된 수십억 달러 산업 | 웹 광고 산업 전체사(배너→검색광고→프로그래매틱), IAB/VAST/OpenRTB 표준, 서드파티 쿠키 폐지, 구글·메타 듀오폴리와 반독점 소송, CPM/CPC/CPA 과금과 애드테크 마진 구조 |
 
 ### 개발문화
 
