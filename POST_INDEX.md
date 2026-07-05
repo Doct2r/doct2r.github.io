@@ -32,6 +32,7 @@
 | `claude-skills.md` | Claude Code 스킬 만들기 | Claude Code 슬래시 커맨드 구조·제작 방법·실전 예시 |
 | `gpu-history-to-ai.md` | GPU — 픽셀을 그리던 칩이 AI 산업의 심장이 된 이유 | GPU의 역할 변화: 그래픽→병렬연산→AI. CUDA 생태계, NVIDIA 독점 구조 |
 | `npu-explained.md` | NPU — AI 이전부터 있었던 전용 연산 칩의 역사 | NPU의 역사·구조·CPU/GPU와의 차이. 온디바이스 AI 역할 |
+| `ai-credibility-problem.md` | AI의 근거는 왜 신뢰받지 못하는가 | LLM의 압축·할루시네이션·비위맞추기(sycophancy) 구조적 원인, 인간의 작화(confabulation)·기억 재구성(로프터스)·증언의 인식론과의 비교, 신뢰의 실질 근거는 정확성이 아닌 책임(accountability), 도구-증언자 범주 착오 결론, 메타인지 차이라는 한계 |
 
 ### 경영
 
