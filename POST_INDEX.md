@@ -121,6 +121,7 @@
 | `memory-types.md` | 메모리의 모든 것 — 종류, 계층, 규격까지 | RAM·NAND·캐시·HBM 등 메모리 종류·계층 구조·규격 차이 |
 | `vr-ar-xr.md` | VR·AR·XR — 눈에 쓰는 컴퓨터, 60년의 역사와 다음 플랫폼 | VR/AR/MR/XR 용어 구분, 1차·2차 웨이브 역사(Virtual Boy·Google Glass·Oculus), Quest·Vision Pro·스마트글래스 사업 전략 비교, 산업 지도, 한계와 전망 |
 | `google-devices.md` | 구글의 하드웨어 — 소프트웨어 회사가 기기를 만드는 이유 | Nexus→Pixel 전환, Tensor 자체 실리콘, Nest·Chromecast·Wifi 등 스마트홈 라인, Daydream·Stadia 컨트롤러 등 실제 출시 기기 계보 |
+| `display-history.md` | 디스플레이의 역사 — CRT에서 OLED, 그리고 그 다음까지 | 발광/비발광 구분, CRT·PDP·LCD(TN/VA/IPS·미니LED)·OLED(WOLED/QD-OLED, QLED 구분)·MicroLED·E-Ink 원리와 역사, 화질 결정 요소 |
 
 ### Windows 개발
 
