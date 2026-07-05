@@ -115,6 +115,9 @@
 | `mobile-crossplatform.md` | 모바일 크로스 플랫폼 — 하나의 코드로 iOS와 Android를 잡을 수 있는가 | WebView/JS브릿지/자체렌더링/로직공유 4가지 철학. React Native·Flutter·KMP·Capacitor·MAUI 비교, 플랫폼별 선택 기준 |
 | `mfc-to-winui3.md` | MFC→WinUI3 마이그레이션 — 프로세스 분리가 답인 이유 | MFC↔C# 연동 시 Native AoT 강제, WinUI3 AoT 미지원 문제, 프로세스 분리 해법 |
 | `release-cycle.md` | 개발 주기 — 개발→테스트→릴리즈가 전부가 아닌 이유 | 플랫폼·앱 유형별 릴리즈 주기 차이. CI/CD·핫픽스·롤백 전략 |
+| `app-architecture-data-layer.md` | 앱을 앱답게 만드는 것들 (1) — 아키텍처와 데이터 계층 | UX/GUI 제외 요소 시리즈 1편. 상태관리 패턴(MVVM/MVI/Redux, 단방향 데이터 흐름), 로컬 저장·캐싱·오프라인 우선 설계, REST/GraphQL/WebSocket 선택 기준, 구조화된 동시성 |
+| `app-sound-system-integration.md` | 앱을 앱답게 만드는 것들 (2) — 사운드와 시스템 통합 | UX/GUI 제외 요소 시리즈 2편. 사운드 디자인·햅틱·오디오 포커스, 로컬/푸시 알림과 딥링크, 권한 요청 흐름, OS별 백그라운드 실행 제약, 로컬라이제이션(복수형·RTL·날짜포맷) |
+| `app-reliability-operations.md` | 앱을 앱답게 만드는 것들 (3) — 신뢰성과 운영 | UX/GUI 제외 요소 시리즈 3편. 저장/통신 암호화·인증인가, 크래시리포팅/로깅/텔레메트리와 PII 마스킹, 테스트 피라미드, 단계적 롤아웃·피처플래그·킬스위치(release-cycle.md의 "주기"와 달리 "안전한 배포 방법"에 초점), APM 성능 모니터링 |
 
 ### 하드웨어
 
