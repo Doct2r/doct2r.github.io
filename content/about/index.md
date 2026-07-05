@@ -24,3 +24,5 @@ title: "About"
 ## 연락
 
 - GitHub: [Doct2r](https://github.com/Doct2r)
+
+<!-- about-refresh-baseline: 64posts / 2026-07-06 — 다음 갱신은 84편(64+20) 도달 시. 규칙: CLAUDE.md 참고 -->
