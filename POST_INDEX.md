@@ -62,6 +62,7 @@
 | `document-management.md` | 문서를 관리하는 법 | 문서 쪼갤 때·합칠 때 기준, 도구별 활용, 구글 3레이어, 문서 부패 방지 |
 | `platform-history.md` | 블로그·카페·SNS·뉴스레터 플랫폼 역사와 AI 미래 | PC통신→블로그→카페→SNS→숏폼→뉴스레터 계보. 한국 특유 카페 문화, AI 이후 검색·콘텐츠 구조 변화 |
 | `android-open-source-reality.md` | 안드로이드는 정말 오픈소스인가 — AOSP와 GMS의 이중 구조 | AOSP(진짜 오픈소스) vs GMS(폐쇄형 라이선스)의 이중 구조, CDD/CTS 인증 관문, OHA→MADA 계약으로의 거버넌스 변화, EU 반독점 판결, 아마존/화웨이/삼성의 이탈·회귀 사례, 삼성의 공동 개발 파트너 역할 |
+| `open-source-starter-reality.md` | '나도 오픈소스를 만들고 싶어!' — 알을 얻으려면 닭부터 키워야 한다 | 개인이 오픈소스를 "시작"하려 할 때의 현실적 관점(open-source-reality.md의 라이선스·산업구조 관점과 다름). 동기 점검, 코딩 외 필요 능력(문서화·거버넌스·지구력), event-stream/colors.js·faker.js 번아웃 사건, 시작 전제조건 체크리스트, 능력별 실전 경로(창시자/기여자/개인공개) |
 
 ### 개발도구
 
