@@ -50,6 +50,7 @@
 | `google-business.md` | 구글 — 검색 회사에서 벗어나려는 광고 회사 | 현재 매출 구조(광고 의존도)·Google Cloud 현황·AI(Gemini) 경쟁과 검색 자기잠식 딜레마·반독점 소송·Waymo 상업화·인력 긴축 |
 | `google-graveyard.md` | 구글 — 나온 지 얼마 안 됐는데 사라진 것들의 목록 | 종료된 프로젝트 총정리(Orkut·Wave·Reader·Stadia·Loon 등)와 반복되는 실패 패턴 분석 |
 | `web-advertising.md` | 웹 광고 — 배너 하나에서 시작된 수십억 달러 산업 | 웹 광고 산업 전체사(배너→검색광고→프로그래매틱), IAB/VAST/OpenRTB 표준, 서드파티 쿠키 폐지, 구글·메타 듀오폴리와 반독점 소송, CPM/CPC/CPA 과금과 애드테크 마진 구조 |
+| `android-market-share-reality.md` | 안드로이드 실제 점유율 — 숫자 하나로 말할 수 없는 이유 | 측정 방식별 차이(웹트래픽 vs 출하량), 지역별 편차(미국 iOS 우세·신흥국 Android 우세), 제조사별 점유율(삼성·애플·샤오미·BBK·트랜션), 화웨이 GMS 이탈로 인한 집계 경계 문제 |
 
 ### 개발문화
 
@@ -58,6 +59,7 @@
 | `dev-conferences.md` | 개발자의 발표 시즌 — 컨퍼런스 캘린더와 특징 | 주요 기술 컨퍼런스(WWDC·I/O·Build·re:Invent)의 시기·성격·관전 포인트 |
 | `document-management.md` | 문서를 관리하는 법 | 문서 쪼갤 때·합칠 때 기준, 도구별 활용, 구글 3레이어, 문서 부패 방지 |
 | `platform-history.md` | 블로그·카페·SNS·뉴스레터 플랫폼 역사와 AI 미래 | PC통신→블로그→카페→SNS→숏폼→뉴스레터 계보. 한국 특유 카페 문화, AI 이후 검색·콘텐츠 구조 변화 |
+| `android-open-source-reality.md` | 안드로이드는 정말 오픈소스인가 — AOSP와 GMS의 이중 구조 | AOSP(진짜 오픈소스) vs GMS(폐쇄형 라이선스)의 이중 구조, CDD/CTS 인증 관문, OHA→MADA 계약으로의 거버넌스 변화, EU 반독점 판결, 아마존/화웨이/삼성의 이탈·회귀 사례, 삼성의 공동 개발 파트너 역할 |
 
 ### 개발도구
 
@@ -123,6 +125,7 @@
 | `vr-ar-xr.md` | VR·AR·XR — 눈에 쓰는 컴퓨터, 60년의 역사와 다음 플랫폼 | VR/AR/MR/XR 용어 구분, 1차·2차 웨이브 역사(Virtual Boy·Google Glass·Oculus), Quest·Vision Pro·스마트글래스 사업 전략 비교, 산업 지도, 한계와 전망 |
 | `google-devices.md` | 구글의 하드웨어 — 소프트웨어 회사가 기기를 만드는 이유 | Nexus→Pixel 전환, Tensor 자체 실리콘, Nest·Chromecast·Wifi 등 스마트홈 라인, Daydream·Stadia 컨트롤러 등 실제 출시 기기 계보 |
 | `display-history.md` | 디스플레이의 역사 — CRT에서 OLED, 그리고 그 다음까지 | 발광/비발광 구분, CRT·PDP·LCD(TN/VA/IPS·미니LED)·OLED(WOLED/QD-OLED, QLED 구분)·MicroLED·E-Ink 원리와 역사, 화질 결정 요소 |
+| `android-reference-device.md` | 안드로이드의 '레퍼런스'는 픽셀이 아니라 갤럭시다 | 레퍼런스 디바이스 개념, 픽셀이 시장 기준이 못 되는 사업구조적 이유(제조 밸류체인·유통망·브랜드 포지션), CDD/GMS 인증이 최소 합격선일 뿐인 이유, 삼성의 물량·부품 수직계열화·One UI·구글과의 공동개발로 실질적 레퍼런스가 된 구조 |
 
 ### Windows 개발
 
