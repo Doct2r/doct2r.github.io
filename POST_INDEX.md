@@ -130,6 +130,7 @@
 | `google-devices.md` | 구글의 하드웨어 — 소프트웨어 회사가 기기를 만드는 이유 | Nexus→Pixel 전환, Tensor 자체 실리콘, Nest·Chromecast·Wifi 등 스마트홈 라인, Daydream·Stadia 컨트롤러 등 실제 출시 기기 계보 |
 | `display-history.md` | 디스플레이의 역사 — CRT에서 OLED, 그리고 그 다음까지 | 발광/비발광 구분, CRT·PDP·LCD(TN/VA/IPS·미니LED)·OLED(WOLED/QD-OLED, QLED 구분)·MicroLED·E-Ink 원리와 역사, 화질 결정 요소 |
 | `android-reference-device.md` | 안드로이드의 '레퍼런스'는 픽셀이 아니라 갤럭시다 | 레퍼런스 디바이스 개념, 픽셀이 시장 기준이 못 되는 사업구조적 이유(제조 밸류체인·유통망·브랜드 포지션), CDD/GMS 인증이 최소 합격선일 뿐인 이유, 삼성의 물량·부품 수직계열화·One UI·구글과의 공동개발로 실질적 레퍼런스가 된 구조 |
+| `robot-definition-boundary.md` | 로봇이란 무엇인가 — 세탁기는 왜 로봇이 아닌가 | 로봇 어원(차페크 R.U.R.), 감지-판단-행동 최소 정의, 세탁기/로봇청소기/산업로봇팔/자율주행차/드론/수술로봇/챗봇/휴머노이드 경계 사례 판정, 인간형 편향(아시모프 3원칙·불쾌한 골짜기), 로봇과 AI의 개념적 차이 |
 
 ### Windows 개발
 
