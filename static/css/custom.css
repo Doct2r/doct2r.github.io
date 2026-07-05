@@ -30,3 +30,20 @@ a:hover,
 [data-theme="dark"] header.intro-header {
     background: linear-gradient(135deg, #1a5a4d 0%, #3d1f25 50%, #5e1a1c 100%) !important;
 }
+
+/* ─── 다크모드 테이블 배경 수정 ───
+   bootstrap.css의 `table { background-color: #FBFBFB }`가 테마 변수와 무관하게
+   하드코딩돼 있어, 다크모드에서도 표만 밝은 배경으로 남는 문제 수정 */
+[data-theme="dark"] table,
+[data-theme="dark"] .table .table {
+    background-color: var(--bg-catalog-active) !important;
+    color: var(--color-text-main) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) table,
+    :root:not([data-theme]) .table .table {
+        background-color: var(--bg-catalog-active) !important;
+        color: var(--color-text-main) !important;
+    }
+}
