@@ -101,6 +101,7 @@
 | 파일 | 제목 | 핵심 논점 — 이미 다룬 각도 |
 |------|------|---------------------------|
 | `aot-interpreter-jit.md` | AoT·인터프리터·JIT — 코드는 어떻게 실행되는가 | 코드 실행 방식 3가지의 원리·성능·트레이드오프 |
+| `design-patterns.md` | 디자인 패턴 — 왜 필요하고, 왜 오남용되는가 | 정의·근본 목적(변화 대응·공통 어휘), GoF 3대 분류와 주요 패턴, 주의사항(과잉설계·언어 의존), 한계(OOP 편향·정적 카탈로그) |
 | `app-advancement.md` | 앱 고도화의 방향성 | 앱 성숙도 단계별 우선순위. 유형(소비자·기업·개발도구·게임)별 고도화 방향 |
 | `database-explained.md` | 데이터베이스란 — 레지스트리도 DB인가 | DB의 정의 범위·SQL/NoSQL 구분·적합 사용 시나리오 |
 | `electron-explained.md` | Electron — 왜 나왔고, 무엇이 문제이며, 지금은 어디에 쓰는가 | Electron 등장 배경, Chromium+Node.js 구조, 메모리·크기 한계, VS Code·Slack·Discord 사례, Tauri·Flutter·CEF 비교 |
