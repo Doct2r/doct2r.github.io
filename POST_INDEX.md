@@ -48,6 +48,7 @@
 | `game-purchase-guide.md` | 게임을 사기 전에 — 요즘 생태계와 구매 판단 기준 | 패키지→상시서비스 생태계 변화, 스팀 평가 읽는 법(최근/전체 리뷰 분리·리뷰폭탄 구분), 디지털 구매=소유 아닌 대여(스토어 하차·규제·유비소프트 강제회수 사례 축약), 개인/단체 단위 구매 판단 체크리스트 |
 | `open-source-reality.md` | 오픈소스 — 공짜도 아니고, 무주공산도 아니다 | 오픈소스 라이선스 체계·지속가능성·기업의 오픈소스 활용 구조 |
 | `sony-playstation-strategy.md` | 소니 플레이스테이션 — 무엇을 지향하고, 어디서 잘못됐는가 | 소니/PS GaaS 피벗 실패, 콩코드 참사, 라오어2 사태, 기업 방관의 구조적 원인 |
+| `oracle-litigation-machine.md` | 오라클, 소송의 화신 | 창업 배경(CIA 프로젝트명 유래)과 PeopleSoft·Siebel·Sun·NetSuite 인수 전략, 라이선스 감사 관행이 영업모델화된 구조, 오라클v.SAP(TomorrowNow 13억달러 평결)·오라클v.구글(자바 API 저작권 11년 대법원행)·리미니스트리트v.오라클·HP v.오라클(아이테니엄, 오라클 31억달러 패소)·JEDI 클라우드 이의제기 연대기, 2019·2023 자바 라이선스 유료화가 부른 OpenJDK 이탈 |
 | `google-history.md` | 구글 — 차고에서 시작해 지주회사가 되기까지 | 창업(PageRank·BackRub)부터 AdWords·IPO·주요 인수·Alphabet 지주회사 전환·리더십 승계까지 연대기 |
 | `google-business.md` | 구글 — 검색 회사에서 벗어나려는 광고 회사 | 현재 매출 구조(광고 의존도)·Google Cloud 현황·AI(Gemini) 경쟁과 검색 자기잠식 딜레마·반독점 소송·Waymo 상업화·인력 긴축 |
 | `google-graveyard.md` | 구글 — 나온 지 얼마 안 됐는데 사라진 것들의 목록 | 종료된 프로젝트 총정리(Orkut·Wave·Reader·Stadia·Loon 등)와 반복되는 실패 패턴 분석 |
