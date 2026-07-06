@@ -165,6 +165,12 @@
 | `winui3-native-aot.md` | WinUI3를 바이너리화 — MFC만큼의 장점이 나오는가? | WinUI3 Native AoT 적용 가능성·한계·MFC 대비 성능·배포 비교 |
 | `app-size-tolerance.md` | 용량 문제, 개발할 때 어디까지 용인되는가 | WPF/WinUI3 Native AoT 100MB 경험을 계기로 한 일반화, 용량이 전이되는 병목(앱스토어 셀룰러 다운로드 제한·구글 APK크기-설치전환율 통계·AWS람다 콜드스타트·웹 번들 이탈률) vs 문제없는 맥락(사내도구·AAA게임 50~150GB·저렴한 서버스토리지), 판단기준 4가지(배포채널 병목·반복빈도·2차지표·현실적 대안과의 격차) |
 
+### macOS 개발
+
+| 파일 | 제목 | 핵심 논점 — 이미 다룬 각도 |
+|------|------|---------------------------|
+| `mac-development-checklist.md` | 맥 개발에서는 무엇을 보아야 하는가? | 지원 macOS 버전 범위(N/N-1/N-2 관행), Swift 버전/언어모드(Concurrency 백디플로이먼트·Swift6 strict concurrency), 커널확장(kext) 지원종료와 System Extensions/DriverKit 전환, 배포경로별 요구사항(App Store 샌드박스 vs 직배포 공증/Hardened Runtime), 애플 실리콘 유니버설 바이너리, CloudKit·Mac Catalyst·SwiftUI 멀티플랫폼 통합 전략, 착수 전 6항목 체크리스트 |
+
 ### 일반
 
 | 파일 | 제목 | 핵심 논점 — 이미 다룬 각도 |
