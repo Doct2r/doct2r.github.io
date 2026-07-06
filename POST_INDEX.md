@@ -142,6 +142,7 @@
 |------|------|---------------------------|
 | `cpu-architecture.md` | CPU/AP 아키텍처 — ISA부터 세대 구분까지 | CPU 설계 철학(x86·ARM·RISC-V), Apple Silicon 전환, 세대별 특성 |
 | `intel-vs-amd-architecture.md` | Intel과 AMD, 같은 x86인데 왜 이렇게 다른가 | 같은 x86-64 ISA 위에서 갈린 다이 설계(Intel 모놀리식→Meteor Lake 타일/Foveros vs AMD Zen2 이후 CCD/IOD 칩렛), 인터커넥트(Ring Bus→Mesh vs Infinity Fabric), 이종코어 접근 차이(Intel P/E 다른 마이크로아키텍처 vs AMD Zen5/5c 동일설계 밀도최적화), AMD 3D V-Cache 적층 캐시, IDM 자체파운드리(Intel) vs 팹리스+TSMC(AMD)가 만든 10nm 지연發 역전과 Intel IDM 2.0 수렴 |
+| `noctua-performance-icon.md` | 녹투아, 성능의 아이콘 | 2005년 오스트리아 라스콤+대만 콜링크 합작 탄생 배경, "못생긴" 갈색·베이지 배색이 브랜드 정체성/성능 인증마크로 굳어진 과정, NSPR 자체 성능지표와 NH-D15(10년간 공랭 1위)·NF-A12x25·SSO2베어링 등 실측 근거, 업계 평균 웃도는 6년 보증과 세대 초월 무상 마운팅 키트(누적 50만개)로 쌓은 신뢰, ASUS 녹투아 에디션 GPU처럼 브랜드가 품질 인증마크로 기능하는 사례 |
 | `memory-types.md` | 메모리의 모든 것 — 종류, 계층, 규격까지 | RAM·NAND·캐시·HBM 등 메모리 종류·계층 구조·규격 차이 |
 | `vr-ar-xr.md` | VR·AR·XR — 눈에 쓰는 컴퓨터, 60년의 역사와 다음 플랫폼 | VR/AR/MR/XR 용어 구분, 1차·2차 웨이브 역사(Virtual Boy·Google Glass·Oculus), Quest·Vision Pro·스마트글래스 사업 전략 비교, 산업 지도, 한계와 전망 |
 | `google-devices.md` | 구글의 하드웨어 — 소프트웨어 회사가 기기를 만드는 이유 | Nexus→Pixel 전환, Tensor 자체 실리콘, Nest·Chromecast·Wifi 등 스마트홈 라인, Daydream·Stadia 컨트롤러 등 실제 출시 기기 계보 |
