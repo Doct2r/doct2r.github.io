@@ -33,6 +33,7 @@
 | `gpu-history-to-ai.md` | GPU — 픽셀을 그리던 칩이 AI 산업의 심장이 된 이유 | GPU의 역할 변화: 그래픽→병렬연산→AI. CUDA 생태계, NVIDIA 독점 구조 |
 | `npu-explained.md` | NPU — AI 이전부터 있었던 전용 연산 칩의 역사 | NPU의 역사·구조·CPU/GPU와의 차이. 온디바이스 AI 역할 |
 | `ai-credibility-problem.md` | AI의 근거는 왜 신뢰받지 못하는가 | LLM의 압축·할루시네이션·비위맞추기(sycophancy) 구조적 원인, 인간의 작화(confabulation)·기억 재구성(로프터스)·증언의 인식론과의 비교, 신뢰의 실질 근거는 정확성이 아닌 책임(accountability), 도구-증언자 범주 착오 결론, 메타인지 차이라는 한계 |
+| `new-language-for-ai-era.md` | 새로운 컴퓨터 언어가 필요할까? — AI가 잘 쓴다는 것의 함의 | 포트란(백커스)·코볼(호퍼)이 애초부터 "인간 인지 보완"을 목적으로 설계됐다는 근거, AI가 기존 언어를 잘 쓰는 이유가 인간친화적 설계+방대한 인간 코퍼스 학습 덕분이라 새 언어는 학습데이터 부재로 오히려 불리하다는 역설, LLVM IR/WASM 같은 기존 "비가독 언어" 선례로 본 저수준 표현 정교화 가능성, "개입 불필요"와 "책임 불필요"를 구분하는 근본 제약(ai-credibility-problem의 accountability와 연결), I.J.굿의 지능폭발(1965) 개념과 자기설계형 언어 시나리오의 특이점 연결 |
 
 ### 경영
 
