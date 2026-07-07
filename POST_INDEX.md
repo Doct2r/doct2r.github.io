@@ -172,6 +172,7 @@
 | `when-to-use-wpf.md` | WPF는 언제 써야만 하는가? | WPF 선택 기준·적합 시나리오·WinUI3·Electron과의 포지셔닝 |
 | `winui3-native-aot.md` | WinUI3를 바이너리화 — MFC만큼의 장점이 나오는가? | WinUI3 Native AoT 적용 가능성·한계·MFC 대비 성능·배포 비교 |
 | `app-size-tolerance.md` | 용량 문제, 개발할 때 어디까지 용인되는가 | WPF/WinUI3 Native AoT 100MB 경험을 계기로 한 일반화, 용량이 전이되는 병목(앱스토어 셀룰러 다운로드 제한·구글 APK크기-설치전환율 통계·AWS람다 콜드스타트·웹 번들 이탈률) vs 문제없는 맥락(사내도구·AAA게임 50~150GB·저렴한 서버스토리지), 판단기준 4가지(배포채널 병목·반복빈도·2차지표·현실적 대안과의 격차) |
+| `microsoft-visual-naming.md` | 왜 마이크로소프트는 'Visual'이라는 이름을 그렇게 좋아했을까 | Visual Basic(1991)의 앨런 쿠퍼 드래그앤드롭 폼디자이너("트라이포드/루비")에서 "Visual"이 문자 그대로 기능을 가리켰던 시작점, Visual C++·Visual FoxPro·Visual J++(csharp-origin의 소송 주인공)·Visual InterDev로 이름값이 확장된 과정, Visual Studio(1997) 우산브랜드 완성, 보랜드 "Turbo"(속도) vs MS "Visual"(시각적 편의) 대비, VS Code(에릭 가마 주도, design-patterns의 그 사람)가 폼디자이너 없이도 이름을 물려받아 브랜드가 문자적 의미에서 분리된 지점 |
 
 ### macOS 개발
 
