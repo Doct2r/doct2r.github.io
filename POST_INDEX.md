@@ -139,6 +139,7 @@
 | `app-advancement.md` | 앱 고도화의 방향성 | 앱 성숙도 단계별 우선순위. 유형(소비자·기업·개발도구·게임)별 고도화 방향 |
 | `database-explained.md` | 데이터베이스란 — 레지스트리도 DB인가 | DB의 정의 범위·SQL/NoSQL 구분·적합 사용 시나리오 |
 | `electron-explained.md` | Electron — 왜 나왔고, 무엇이 문제이며, 지금은 어디에 쓰는가 | Electron 등장 배경, Chromium+Node.js 구조, 메모리·크기 한계, VS Code·Slack·Discord 사례, Tauri·Flutter·CEF 비교 |
+| `ai-ide-vscode-forks.md` | AI IDE들이 죄다 VS Code 포크인 이유 — 단순히 오픈소스라서가 아니다 | Cursor·Windsurf·Trae가 공개적으로 인정하는 VS Code 포크 현상, "오픈소스라서"만으로는 부족한 이유(Vim·Emacs도 오픈소스), Code-OSS(MIT)+마켓플레이스만 독점이라는 크로미움/크롬과 동일한 라이선스 구조(VSCodium 선례), LSP(2016)가 만든 언어서버 생태계 무상승계, Electron 크로스플랫폼, 전환비용 제로화라는 결정적 비즈니스 논리(Cursor의 "설정 한번에 가져오기"), 브라우저엔진 R&D 회피와의 구조적 평행, MS 오픈소스화 전략이 자사 코파일럿의 경쟁자를 낳은 부메랑(오라클 자바 오픈소스화 패턴과 동일) |
 | `flutter-explained.md` | Flutter — 플랫폼 위젯을 버리고 직접 그리는 선택 | Impeller 렌더링 구조, Widget/Element/RenderObject 3트리, Dart null safety, 상태관리(Riverpod/BLoC), Google Pay·Alibaba·BMW 사례 |
 | `react-native-explained.md` | React Native — 페이스북이 HTML5를 포기한 날부터 시작된 이야기 | 구 아키텍처(Bridge) vs 새 아키텍처(JSI/Fabric), Expo 생태계, Airbnb 이탈 사례 분석, Meta·Shopify·Microsoft 사용 현황 |
 | `tauri-explained.md` | Tauri — Electron의 대안인가, 진짜 후계자인가 | OS WebView 사용 구조, 크기·메모리·보안 실질적 장점, Capabilities 권한 시스템, 생태계 현황, Wails·Flutter·CEF 비교, 언제 선택할지 |
