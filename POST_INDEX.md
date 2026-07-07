@@ -183,6 +183,7 @@
 | 파일 | 제목 | 핵심 논점 — 이미 다룬 각도 |
 |------|------|---------------------------|
 | `mac-development-checklist.md` | 맥 개발에서는 무엇을 보아야 하는가? | 지원 macOS 버전 범위(N/N-1/N-2 관행), Swift 버전/언어모드(Concurrency 백디플로이먼트·Swift6 strict concurrency), 커널확장(kext) 지원종료와 System Extensions/DriverKit 전환, 배포경로별 요구사항(App Store 샌드박스 vs 직배포 공증/Hardened Runtime), 애플 실리콘 유니버설 바이너리, CloudKit·Mac Catalyst·SwiftUI 멀티플랫폼 통합 전략, 착수 전 6항목 체크리스트 |
+| `apple-ui-toolkit-genealogy.md` | 애플 네이티브 개발 참고 지식 — AppKit부터 SwiftUI까지, UI 툴킷의 계보 | 넥스트 AppKit(1988, 오브젝티브C·MVC·"NS"접두어 유래)→애플인수 후 코코아(1997~2001)→과도기 Carbon의 2007년 64비트 미지원 사망선고→아이폰 UIKit(2008, AppKit과 같은 조상에서 갈라짐)→워치/TV 파편화, 스위프트(2014) 이후에도 UIKit/AppKit에 남은 오브젝티브C 흔적(@objc·#selector·KVO·델리게이트패턴), SwiftUI(2019)의 유산없는 선언형 재설계와 procedural-code-limits의 명령형-선언형 전환과의 연결, UIViewRepresentable/NSViewRepresentable이라는 여전히 필요한 다리, 시대별 프레임워크 매핑표 |
 
 ### 일반
 
