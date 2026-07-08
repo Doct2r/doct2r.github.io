@@ -62,7 +62,7 @@ categories: ["프로그래밍"]
 
 ## 6. 오라클의 그림자 — javax에서 jakarta로
 
-Spring 생태계도 오라클의 자바 상표권 통제에서 자유롭지 않다. 오라클이 자바 상표를 계속 쥐고 있던 탓에([[oracle-litigation-machine]] 참고), Java EE는 2017년 이클립스 재단으로 이관되며 **Jakarta EE**로 이름이 바뀌었고, 2020년 Jakarta EE 9부터는 패키지 네임스페이스 자체가 `javax.*`에서 `jakarta.*`로 강제 변경됐다. 이 여파로 2022년 나온 **Spring Framework 6 / Spring Boot 3**는 `jakarta.*` 네임스페이스로 완전히 갈아타며 구버전 `javax` 기반 라이브러리와의 하위 호환을 끊었다. 자바 생태계 어디에 있든 오라클의 상표권 결정 하나가 몇 년 뒤 마이그레이션 비용으로 돌아온다는 걸 보여주는 사례다.
+Spring 생태계도 오라클의 자바 상표권 통제에서 자유롭지 않다. 오라클이 자바 상표를 계속 쥐고 있던 탓에([오라클, 소송의 화신](/posts/oracle-litigation-machine/) 참고), Java EE는 2017년 이클립스 재단으로 이관되며 **Jakarta EE**로 이름이 바뀌었고, 2020년 Jakarta EE 9부터는 패키지 네임스페이스 자체가 `javax.*`에서 `jakarta.*`로 강제 변경됐다. 이 여파로 2022년 나온 **Spring Framework 6 / Spring Boot 3**는 `jakarta.*` 네임스페이스로 완전히 갈아타며 구버전 `javax` 기반 라이브러리와의 하위 호환을 끊었다. 자바 생태계 어디에 있든 오라클의 상표권 결정 하나가 몇 년 뒤 마이그레이션 비용으로 돌아온다는 걸 보여주는 사례다.
 
 ---
 
