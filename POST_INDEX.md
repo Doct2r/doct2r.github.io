@@ -108,6 +108,7 @@
 |------|------|---------------------------|
 | `os-philosophy.md` | 각 상용 OS의 이념 — 왜 이렇게 만들어졌는가 | Windows·macOS·Linux·Android·iOS의 설계 철학·역사적 맥락 |
 | `shell-history.md` | 쉘(Shell)이란 — bash부터 PowerShell까지 | 쉘의 역사·종류별 특성·선택 기준 |
+| `why-cli-still-exists.md` | CLI를 왜 아직도 쓰는가 | shell-history.md와 달리 역사가 아니라 "왜 지금도 쓰는가"라는 분석에 집중, 조합성(파이프의 무한조합 vs GUI의 사전정의된 버튼)·자동화재현성(테라폼·앤서블이 텍스트기반인 이유)·헤드리스 원격환경 효율성(SSH vs RDP/VNC 대역폭)·정밀성(모호한 클릭 vs 명시적 명령)·발견가능성-표현력 트레이드오프(초심자엔 GUI, 숙련자엔 CLI)·텍스트 생태계(git·코드리뷰)와의 궁합이라는 6가지 실질적 근거 |
 | `virtualization-concepts.md` | 시뮬레이터·에뮬레이터·VM·컨테이너 — 헷갈리는 가상화 개념 | 가상화 기술의 계층 구분·동작 원리·적합 사용 시나리오 |
 | `windows-history.md` | Windows의 역사 — 두 혈통의 충돌 | Windows 커널 계보(9x·NT), 퐁당퐁당 법칙, 버전별 특성 |
 | `wsa-death.md` | WSA의 죽음 — Windows에서 Android가 실패한 이유 | WSA 실패 원인 분석. MS의 전략 실수·생태계 구조 문제 |
