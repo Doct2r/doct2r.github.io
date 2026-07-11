@@ -29,4 +29,4 @@ title: "About"
 
 - GitHub: [Doct2r](https://github.com/Doct2r)
 
-<!-- about-refresh-baseline: 209posts / 2026-07-12 — 다음 갱신은 229편(209+20) 도달 시. 규칙: CLAUDE.md 참고 -->
+<!-- about-refresh-baseline: 209posts / 2026-07-12 — 다음 갱신은 220편(20의 배수) 도달 시. 규칙: CLAUDE.md 참고 -->
