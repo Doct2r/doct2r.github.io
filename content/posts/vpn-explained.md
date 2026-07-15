@@ -66,7 +66,7 @@ RFC와 IETF 관점에서 VPN은 특정 기술이 아니라 **개념**이다. 표
 
 #### IPsec
 
-가장 오래되고 표준화된 VPN 프로토콜. IETF RFC 4301~4309에 정의되어 있다. IP 레이어에서 동작하므로 상위 프로토콜(TCP, UDP)을 가리지 않는다.
+가장 오래되고 표준화된 VPN 프로토콜. IETF RFC 4301～4309에 정의되어 있다. IP 레이어에서 동작하므로 상위 프로토콜(TCP, UDP)을 가리지 않는다.
 
 두 가지 모드가 있다.
 
@@ -109,9 +109,9 @@ OpenVPN이 대표적인 오픈소스 구현이며, Cisco AnyConnect, Palo Alto G
 
 | 프로토콜 | 코드 라인 수 |
 |---|---|
-| OpenVPN | ~70,000 줄 |
-| IPsec (strongSwan) | ~400,000 줄 |
-| WireGuard | ~4,000 줄 |
+| OpenVPN | ～70,000 줄 |
+| IPsec (strongSwan) | ～400,000 줄 |
+| WireGuard | ～4,000 줄 |
 
 코드가 작으면 취약점이 숨을 공간이 줄어든다. 감사(audit)도 쉽다.
 

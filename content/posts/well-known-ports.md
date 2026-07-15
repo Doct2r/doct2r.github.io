@@ -14,15 +14,15 @@ categories: ["네트워크"]
 
 TCP/IP에서 하나의 IP 주소는 여러 서비스를 동시에 제공할 수 있다. 이때 어떤 패킷이 어떤 서비스로 가야 하는지 구분하는 번호가 **포트(Port)**다.
 
-포트는 0~65535 범위의 16비트 정수다. IANA(Internet Assigned Numbers Authority)가 범위별로 용도를 정의한다.
+포트는 0～65535 범위의 16비트 정수다. IANA(Internet Assigned Numbers Authority)가 범위별로 용도를 정의한다.
 
 | 범위 | 이름 | 용도 |
 |---|---|---|
-| 0 ~ 1023 | Well-known Ports | OS가 관리. 표준 프로토콜 전용 |
-| 1024 ~ 49151 | Registered Ports | 벤더/애플리케이션이 IANA에 등록 |
-| 49152 ~ 65535 | Dynamic / Ephemeral Ports | OS가 클라이언트 연결 시 임시 할당 |
+| 0 ～ 1023 | Well-known Ports | OS가 관리. 표준 프로토콜 전용 |
+| 1024 ～ 49151 | Registered Ports | 벤더/애플리케이션이 IANA에 등록 |
+| 49152 ～ 65535 | Dynamic / Ephemeral Ports | OS가 클라이언트 연결 시 임시 할당 |
 
-Well-known Ports(0~1023)는 Unix 계열에서 **root 권한 없이는 바인딩이 불가능**하다. 이 범위가 신뢰의 근거다.
+Well-known Ports(0～1023)는 Unix 계열에서 **root 권한 없이는 바인딩이 불가능**하다. 이 범위가 신뢰의 근거다.
 
 ---
 

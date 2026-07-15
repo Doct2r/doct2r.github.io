@@ -226,7 +226,7 @@ connect(sock, (struct sockaddr*)&addr, sizeof(addr));
 | | Windows | macOS | Linux |
 |---|---|---|---|
 | API | `GenerateConsoleCtrlEvent()`, `TerminateProcess()` | `kill()`, `sigaction()` | `kill()`, `sigaction()` |
-| 실시간 시그널 | 없음 | 없음 | `SIGRTMIN`~`SIGRTMAX` |
+| 실시간 시그널 | 없음 | 없음 | `SIGRTMIN`～`SIGRTMAX` |
 
 **Linux / macOS:**
 ```c

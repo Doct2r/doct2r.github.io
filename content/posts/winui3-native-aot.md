@@ -61,8 +61,8 @@ Native AoT + WinUI3 조합을 실제로 빌드해보면 현실이 보인다.
 
 | 방식 | 배포 크기 |
 |---|---|
-| MFC 앱 (정적 링크) | 1~5 MB |
-| WinUI3 (MSIX 패키지) | 10~30 MB + SDK 런타임 별도 |
+| MFC 앱 (정적 링크) | 1～5 MB |
+| WinUI3 (MSIX 패키지) | 10～30 MB + SDK 런타임 별도 |
 | WinUI3 + Native AoT | **100 MB+** |
 
 MFC의 장점을 재현하려다 오히려 더 나빠진 셈이다.
