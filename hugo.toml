@@ -56,7 +56,7 @@ buildExpired = false
   tag      = 'tags'
 
 [outputs]
-  home = ['HTML', 'RSS']
+  home = ['HTML', 'RSS', 'ROBOTS']
 
 [markup]
   [markup.highlight]
