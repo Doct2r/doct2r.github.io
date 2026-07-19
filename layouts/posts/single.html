@@ -133,13 +133,16 @@
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                        {{ $featured_condition_size := .Site.Params.featured_condition_size }}
+                        {{ $count := .Site.Params.featured_tags_count | default 18 }}
+                        {{ $tags := slice }}
                         {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
-                        {{ if gt (len $taxonomy.Pages) $featured_condition_size }}
-                        <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}" title="{{ $name }}">
-                            {{ $name }}
-                        </a>
+                            {{ $tags = $tags | append (dict "name" $name "count" (len $taxonomy.Pages)) }}
                         {{ end }}
+                        {{ $tags = sort $tags "count" "desc" }}
+                        {{ range first $count $tags }}
+                            <a href="{{ "/tags/" | relLangURL }}{{ .name | urlize }}" title="{{ .name }} ({{ .count }})">
+                                {{ .name }}
+                            </a>
                         {{ end }}
                     </div>
                 </section>
