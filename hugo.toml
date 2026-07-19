@@ -25,8 +25,8 @@ buildExpired = false
 
   sidebar_about_description = "소프트웨어 개발자"
 
-  featured_tags           = true
-  featured_condition_size = 0
+  featured_tags       = true
+  featured_tags_count = 18
 
   algolia_search    = false
   page_view_counter = false
