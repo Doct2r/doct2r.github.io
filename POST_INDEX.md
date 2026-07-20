@@ -222,6 +222,7 @@
 
 | 파일 | 제목 | 핵심 논점 — 이미 다룬 각도 |
 |------|------|---------------------------|
+| `refactoring-history-origin.md` | 리팩토링이라는 말은 어디서 왔을까 — 박사논문 한 편에서 업계 표준 관행까지 | "리팩토링"용어자체역사(오퍼다이크1992일리노이대박사논문「Refactoring Object-Oriented Frameworks」랄프존슨지도, 동작보존검증초점), 같은해커닝엄기술부채은유(software-maintenance-explained.md와각도차별화-여긴"같은해다른갈래로수렴"이라는병렬조명, 상세는링크로위임), 최초자동화도구(돈로버츠·존브랜트 리팩토링브라우저 1997 TAPOS논문, 존슨의두번째제자), 크라이슬러C3와XP연결(fast-development-methodologies.md와각도차별화-여긴"리팩토링이팀실천법으로자리잡은경로"초점, XP자체기원은링크위임), 1999마틴파울러책(벡·브랜트·오퍼다이크·로버츠공저+감마서문, "코드스멜"용어켄틀벡이집필돕던중창안), IDE자동화(2001 IntelliJ IDEA자바용메서드추출자동화첫사례), 2018 2판(자바→자바스크립트전환이유+68개리팩토링), 반론(조엘스폴스키2000 "Things You Should Never Do"-넷스케이프전면재작성비판, 리팩토링≠처음부터다시쓰기구분) |
 | `aot-interpreter-jit.md` | AoT·인터프리터·JIT — 코드는 어떻게 실행되는가 | 코드 실행 방식 3가지의 원리·성능·트레이드오프 |
 | `csharp-origin.md` | C#은 왜 나왔는가 — 자바 소송이 낳은 언어 | MS의 Visual J++ 자바 라이선스 위반과 Sun의 1997년 소송, 앤더스 헤일스버그 영입과 "Cool"→C# 탄생, C++/자바 절충 설계(프로퍼티·이벤트·델리게이트), CLR/.NET 다국어 런타임이 진짜 목적, ECMA/ISO 표준화 전략, Roslyn 오픈소스화로 크로스플랫폼 전환 |
 | `nuget-explained.md` | NuGet이란 무엇인가? | 2010년 NuPack→상표문제로 NuGet 개명, Outercurve Foundation→.NET Foundation 이관, .nupkg(ZIP+.nuspec 메타데이터) 구조, .NET Framework/Core 분열사가 만든 멀티 타겟 프레임워크(TFM)를 한 패키지에 담는 독특한 구조, packages.config→PackageReference 전환과 dotnet CLI/Paket, Newtonsoft.Json 유통사례, npm/Maven/pip/Cargo와의 비교 |
