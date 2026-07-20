@@ -347,6 +347,7 @@
 
 | 파일 | 제목 | 핵심 논점 — 이미 다룬 각도 |
 |------|------|---------------------------|
+| `atl-active-template-library-explained.md` | ATL이란 무엇인가 — MFC의 하위 라이브러리가 아니라 그 무거움에 대한 반작용이었다 | 신규주제(framework-pattern-limits.md는MFC자체+MVC관계초점, 본글은ATL자체역사+"ATL=MFC하위"오해정정이핵심), 오해원인(같은VC++팀산물+프로젝트마법사공동노출+2003VS.NET ATL7.0의ATLMFC공유레이어때문이지포함관계아님), 탄생(1997.2 VC++5.0프로페셔널정식출시, MFC기반COM/ActiveX가MFC42.DLL등지원DLL의존으로바이너리비대→다이얼업시절IE내ActiveX컨트롤다운로드지연이라는실질문제조준), 설계(CRTP+다중상속-CComObjectRootEx<T>처럼자기자신을템플릿인자로넘겨스레딩모델등을컴파일타임에조합, MFC메시지맵BEGIN_MESSAGE_MAP(런타임디스패치테이블)과대비되는ATL의BEGIN_COM_MAP(같은매크로기반이나가상함수오버헤드없는정적조립)이라는같은문제다른전략), 맹점(ATL은원래창·메시지루프없음→ATL참여엔지니어네나드스테파노비치가1990년대後반사내용WTL제작, MS가SourceForge에2004커먼퍼블릭라이선스로공개+2007 WTL8.0後MS직접관여중단+스테파노비치개인이후로도유지보수), 버전궤적(ATL3.0 1998VC++6.0→ATL7.0 2003VS.NET어트리뷰트기반코드생성도입(디버깅어렵다불만)→ATL8.0 2005VS2005에서마법사가어트리뷰트기본생성중단으로사실상폐기→2013VS2013(ATL12前後)전체정적링크化로DLL의존성자체제거-원래없애려던문제를ATL자신에게서도해결), 지금([mfc-to-winui3.md](/posts/mfc-to-winui3/)마이그레이션논의에도등장-레거시MFC앱상당수내부ATL기반COM의존, C++/WinRT가신규프로젝트일부대체하나클래식COM/ActiveX/OLE인터롭엔여전히유일한실질선택지) |
 | `when-to-use-wpf.md` | WPF는 언제 써야만 하는가? | WPF 선택 기준·적합 시나리오·WinUI3·Electron과의 포지셔닝 |
 | `winui3-native-aot.md` | WinUI3를 바이너리화 — MFC만큼의 장점이 나오는가? | WinUI3 Native AoT 적용 가능성·한계·MFC 대비 성능·배포 비교 |
 | `app-size-tolerance.md` | 용량 문제, 개발할 때 어디까지 용인되는가 | WPF/WinUI3 Native AoT 100MB 경험을 계기로 한 일반화, 용량이 전이되는 병목(앱스토어 셀룰러 다운로드 제한·구글 APK크기-설치전환율 통계·AWS람다 콜드스타트·웹 번들 이탈률) vs 문제없는 맥락(사내도구·AAA게임 50~150GB·저렴한 서버스토리지), 판단기준 4가지(배포채널 병목·반복빈도·2차지표·현실적 대안과의 격차) |
