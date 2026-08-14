@@ -1,12 +1,22 @@
 ---
 import Base from '../../layouts/Base.astro';
 import graphData from '../../data/bible-graph.json';
+import writingPeriodsData from '../../data/bible-writing-periods.json';
 import { getTimeRange, yearToPercent } from '../../lib/graph-timeline';
 import type { GraphData } from '../../lib/graph-types';
 
-// 구약/신약 전환점(기원후 0년) 표시 위치는 데이터의 연도 범위로 정해지므로 빌드 타임에 계산해 둔다.
+// 구약/신약 전환점(기원후 0년), 집필 시기 막대 위치는 모두 데이터의 연도 범위를 기준으로
+// 정해지므로 빌드 타임에 한 번만 계산해 둔다. 사건 시간 바와 같은 축을 쓰기 때문에,
+// 슬라이더가 가리키는 "지금"이 어떤 책이 이미 쓰였을 시점인지 그대로 겹쳐 볼 수 있다.
 const range = getTimeRange(graphData as GraphData);
 const eraMarkerPct = range ? yearToPercent(0, range) : null;
+const writingBands = range
+  ? writingPeriodsData.periods.map((p) => {
+      const left = yearToPercent(p.start, range);
+      const right = yearToPercent(p.end, range);
+      return { ...p, leftPct: left, widthPct: right - left };
+    })
+  : [];
 ---
 <Base title="성경 관계도 — Doct2r" description="시대별 인물·왕국의 변화를 시간 바로 훑어보는 관계도 (근사 연대)">
   <header>
@@ -36,11 +46,35 @@ const eraMarkerPct = range ? yearToPercent(0, range) : null;
     </div>
   </div>
 
+  <div class="writing-toggle-row">
+    <button id="writing-toggle" type="button" class="writing-toggle">성경 집필 시기 표시</button>
+  </div>
+  <div id="writing-periods" class="writing-periods" hidden>
+    <p class="writing-note">
+      아래 막대는 본문 속 사건이 아니라, 각 책 묶음이 실제로 <strong>기록됐다고 보는(추정) 시기</strong>입니다 —
+      위 시간 바가 가리키는 사건 시점과는 다른 축입니다. 연대는 학설에 따라 편차가 큽니다.
+    </p>
+    {writingBands.map((b) => (
+      <div class="wp-row">
+        <span class="wp-label">{b.label}</span>
+        <div class="wp-track">
+          <div class="wp-bar" style={`left:${b.leftPct}%;width:${b.widthPct}%`}></div>
+        </div>
+      </div>
+    ))}
+    <div class="wp-row wp-cursor-row">
+      <span class="wp-label"></span>
+      <div class="wp-track">
+        <div id="wp-cursor" class="wp-cursor"></div>
+      </div>
+    </div>
+  </div>
+
   <script is:inline type="application/json" id="graph-data" set:html={JSON.stringify(graphData)} />
 
   <script>
     import { createThemedGraph } from '../../lib/cytoscape-theme';
-    import { applyTimeFilter, getTimeRange, formatYear } from '../../lib/graph-timeline';
+    import { applyTimeFilter, getTimeRange, formatYear, yearToPercent } from '../../lib/graph-timeline';
     import type { GraphData } from '../../lib/graph-types';
 
     const raw = document.getElementById('graph-data')?.textContent ?? '{"nodes":[],"edges":[]}';
@@ -48,6 +82,7 @@ const eraMarkerPct = range ? yearToPercent(0, range) : null;
     const container = document.getElementById('cy');
     const rangeInput = document.getElementById('year-range') as HTMLInputElement | null;
     const yearLabel = document.getElementById('year-label');
+    const wpCursor = document.getElementById('wp-cursor');
 
     if (container) {
       const cy = createThemedGraph(container, data, {
@@ -66,11 +101,24 @@ const eraMarkerPct = range ? yearToPercent(0, range) : null;
           const year = Number(rangeInput.value);
           yearLabel.textContent = formatYear(year);
           applyTimeFilter(cy, data, year);
+          if (wpCursor) {
+            wpCursor.style.left = `${yearToPercent(year, range)}%`;
+          }
         };
 
         rangeInput.addEventListener('input', update);
         update();
       }
+    }
+
+    const writingToggle = document.getElementById('writing-toggle');
+    const writingPanel = document.getElementById('writing-periods') as HTMLElement | null;
+    if (writingToggle && writingPanel) {
+      writingToggle.addEventListener('click', () => {
+        const willShow = writingPanel.hidden;
+        writingPanel.hidden = !willShow;
+        writingToggle.textContent = willShow ? '성경 집필 시기 숨기기' : '성경 집필 시기 표시';
+      });
     }
   </script>
 </Base>
@@ -160,5 +208,71 @@ const eraMarkerPct = range ? yearToPercent(0, range) : null;
     font-size: 0.7rem;
     color: var(--hub-text-muted);
     white-space: nowrap;
+  }
+  .writing-toggle-row {
+    padding: 0 2rem;
+  }
+  .writing-toggle {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid var(--hub-card-border);
+    background: var(--hub-card-bg);
+    color: var(--hub-text);
+    cursor: pointer;
+  }
+  .writing-toggle:hover {
+    border-color: var(--hub-card-border-hover);
+  }
+  .writing-periods {
+    padding: 1rem 2rem 2rem;
+  }
+  .writing-note {
+    margin: 0 0 0.75rem;
+    font-size: 0.8rem;
+    color: var(--hub-text-muted);
+    max-width: 640px;
+  }
+  .wp-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .wp-label {
+    min-width: 8rem;
+    font-size: 0.78rem;
+    color: var(--hub-text-muted);
+  }
+  .wp-track {
+    position: relative;
+    flex: 1;
+    height: 0.85rem;
+    background: var(--hub-card-border);
+    border-radius: 4px;
+  }
+  .wp-bar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: var(--hub-graph-place);
+    border-radius: 4px;
+    min-width: 2px;
+  }
+  .wp-cursor-row {
+    margin-top: 0.6rem;
+  }
+  .wp-cursor-row .wp-track {
+    height: 0;
+    background: none;
+    overflow: visible;
+  }
+  .wp-cursor {
+    position: absolute;
+    top: -0.4rem;
+    bottom: -0.4rem;
+    width: 0;
+    border-left: 2px solid var(--hub-graph-person);
+    pointer-events: none;
   }
 </style>
