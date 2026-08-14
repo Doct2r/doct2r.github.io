@@ -1,12 +1,10 @@
 import type cytoscape from 'cytoscape';
-import type { GraphData, GraphNode } from './graph-types';
+import type { GraphData } from './graph-types';
 
-const HIDDEN_OPACITY = 0.08;
-
-function isActiveAt(node: GraphNode, year: number): boolean {
-  if (node.start === undefined) return true; // 시간 정보 없는 노드는 항상 표시
-  const start = node.start;
-  const end = node.end ?? node.start;
+function isActiveAt(range: { start?: number; end?: number }, year: number): boolean {
+  if (range.start === undefined) return true; // 시간 정보 없으면 항상 표시
+  const start = range.start;
+  const end = range.end ?? range.start;
   return start <= year && year <= end;
 }
 
@@ -17,11 +15,19 @@ export function getTimeRange(data: GraphData): { min: number; max: number } | nu
   return { min: Math.min(...years), max: Math.max(...years) };
 }
 
+/** 연도를 [min, max] 범위 안에서의 0~100 퍼센트 위치로 바꾼다. 시간 바 위에 특정 시점을 표시할 때 쓴다. */
+export function yearToPercent(year: number, range: { min: number; max: number }): number {
+  if (range.max === range.min) return 0;
+  return ((year - range.min) / (range.max - range.min)) * 100;
+}
+
 /**
  * 선택한 연도 기준으로 노드/엣지의 표시 여부를 갱신한다.
- * 레이아웃(위치)은 건드리지 않고 투명도·클릭 가능 여부만 바꿔서, 슬라이더를 움직여도
- * 그래프가 들썩이지 않고 매끈하게 나타났다 사라지게 한다.
- * 엣지는 양쪽 끝 노드가 둘 다 살아있을 때만 보인다.
+ * 레이아웃(위치)은 건드리지 않고 display만 바꿔서(비활성 = 완전히 사라짐), 슬라이더를
+ * 움직이면 그 시점에 없던 인물·집단·지역·관계는 흐려지는 게 아니라 아예 안 보이게 한다.
+ * 엣지는 (1) 양쪽 끝 노드가 둘 다 살아있고, (2) 엣지 자신에게 start/end가 있다면 그
+ * 기간에도 들어와야 보인다 — 같은 두 노드 사이라도 시기별로 성격이 다른 관계를
+ * 엣지를 여러 개 둬서 표현할 수 있게 하기 위함이다(예: 로마-유대의 "봉신국"→"직할 속주").
  */
 export function applyTimeFilter(cy: cytoscape.Core, data: GraphData, year: number): void {
   const activeIds = new Set(data.nodes.filter((n) => isActiveAt(n, year)).map((n) => n.id));
@@ -29,11 +35,13 @@ export function applyTimeFilter(cy: cytoscape.Core, data: GraphData, year: numbe
   cy.batch(() => {
     cy.nodes().forEach((ele) => {
       const active = activeIds.has(ele.id());
-      ele.style({ opacity: active ? 1 : HIDDEN_OPACITY, events: active ? 'yes' : 'no' });
+      ele.style({ display: active ? 'element' : 'none' });
     });
     cy.edges().forEach((ele) => {
-      const active = activeIds.has(ele.data('source')) && activeIds.has(ele.data('target'));
-      ele.style({ opacity: active ? 1 : HIDDEN_OPACITY, events: active ? 'yes' : 'no' });
+      const nodesActive = activeIds.has(ele.data('source')) && activeIds.has(ele.data('target'));
+      const ownWindowActive = isActiveAt({ start: ele.data('start'), end: ele.data('end') }, year);
+      const active = nodesActive && ownWindowActive;
+      ele.style({ display: active ? 'element' : 'none' });
     });
   });
 }

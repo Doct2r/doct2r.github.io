@@ -1,5 +1,5 @@
 {
-  "_comment": "연대는 학계·전통 사이에 이견이 있는 전통적 근사값(예: 출애굽 이른 연대설 vs 늦은 연대설 등)이며, 시간 바 기능을 보여주기 위한 1차 데이터셋이다. 인물은 대략적 활동/생존 시기, 왕국·제국은 존속 시기를 start~end(기원전은 음수)로 표시했다.",
+  "_comment": "연대는 학계·전통 사이에 이견이 있는 전통적 근사값(예: 출애굽 이른 연대설 vs 늦은 연대설, 예수 탄생 연대 등)이며, 시간 바 기능을 보여주기 위한 데이터셋이다. type은 인물(person)·집단(group, 왕국·제국 등)·지역(place, 지리적 장소)으로 나눴다. 지역은 대체로 특정 시기에 국한되지 않으므로 start/end 없이 항상 표시되게 두었다. 로마-유대(judea-roman) 관계는 같은 두 대상 사이라도 시기에 따라 성격이 바뀌는 예로, 하나의 엣지 라벨을 시간에 따라 바꾸는 대신 start/end가 다른 엣지 두 개(봉신국 → 직할 속주)를 두어 표현했다.",
   "nodes": [
     { "id": "abraham", "label": "아브라함", "type": "person", "start": -2000, "end": -1825 },
     { "id": "isaac", "label": "이삭", "type": "person", "start": -1900, "end": -1720 },
@@ -9,12 +9,22 @@
     { "id": "david", "label": "다윗", "type": "person", "start": -1010, "end": -970 },
     { "id": "solomon", "label": "솔로몬", "type": "person", "start": -970, "end": -931 },
     { "id": "cyrus", "label": "키루스(고레스)", "type": "person", "start": -590, "end": -530 },
-    { "id": "israel-united", "label": "이스라엘왕국(통일)", "type": "polity", "start": -1050, "end": -931 },
-    { "id": "israel-north", "label": "이스라엘왕국(북)", "type": "polity", "start": -931, "end": -722 },
-    { "id": "judah-south", "label": "유다왕국(남)", "type": "polity", "start": -931, "end": -586 },
-    { "id": "assyria", "label": "아시리아제국", "type": "polity", "start": -900, "end": -609 },
-    { "id": "babylon", "label": "바빌로니아제국", "type": "polity", "start": -626, "end": -539 },
-    { "id": "persia", "label": "페르시아제국", "type": "polity", "start": -539, "end": -330 }
+    { "id": "herod", "label": "헤롯대왕", "type": "person", "start": -73, "end": -4 },
+    { "id": "jesus", "label": "예수", "type": "person", "start": -4, "end": 30 },
+    { "id": "paul", "label": "바울", "type": "person", "start": 5, "end": 65 },
+
+    { "id": "israel-united", "label": "이스라엘왕국(통일)", "type": "group", "start": -1050, "end": -931 },
+    { "id": "israel-north", "label": "이스라엘왕국(북)", "type": "group", "start": -931, "end": -722 },
+    { "id": "judah-south", "label": "유다왕국(남)", "type": "group", "start": -931, "end": -586 },
+    { "id": "assyria", "label": "아시리아제국", "type": "group", "start": -900, "end": -609 },
+    { "id": "babylon", "label": "바빌로니아제국", "type": "group", "start": -626, "end": -539 },
+    { "id": "persia", "label": "페르시아제국", "type": "group", "start": -539, "end": -330 },
+    { "id": "rome", "label": "로마제국", "type": "group", "start": -63, "end": 476 },
+    { "id": "judea-roman", "label": "유대(로마 지배기)", "type": "group", "start": -37, "end": 100 },
+
+    { "id": "canaan", "label": "가나안", "type": "place" },
+    { "id": "egypt", "label": "애굽(이집트)", "type": "place" },
+    { "id": "jerusalem", "label": "예루살렘", "type": "place" }
   ],
   "edges": [
     { "source": "abraham", "target": "isaac", "label": "아버지" },
@@ -28,6 +38,31 @@
     { "source": "assyria", "target": "israel-north", "label": "정복" },
     { "source": "babylon", "target": "judah-south", "label": "정복" },
     { "source": "cyrus", "target": "persia", "label": "왕" },
-    { "source": "persia", "target": "babylon", "label": "정복" }
+    { "source": "persia", "target": "babylon", "label": "정복" },
+
+    { "source": "abraham", "target": "canaan", "label": "이주" },
+    { "source": "joseph", "target": "egypt", "label": "이주" },
+    { "source": "moses", "target": "egypt", "label": "탈출(출애굽)" },
+    { "source": "david", "target": "jerusalem", "label": "수도로 삼음" },
+    { "source": "jesus", "target": "jerusalem", "label": "활동·처형" },
+
+    { "source": "herod", "target": "judea-roman", "label": "왕" },
+    {
+      "source": "rome",
+      "target": "judea-roman",
+      "label": "봉신국(간접 통치)",
+      "kind": "client",
+      "start": -37,
+      "end": 6
+    },
+    {
+      "source": "rome",
+      "target": "judea-roman",
+      "label": "로마 속주(직할 통치)",
+      "kind": "annexed",
+      "start": 6,
+      "end": 100
+    },
+    { "source": "paul", "target": "rome", "label": "로마 시민권" }
   ]
 }

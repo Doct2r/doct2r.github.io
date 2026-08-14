@@ -28,8 +28,8 @@ import graphData from '../../data/blog-graph.json';
 
     if (container) {
       createThemedGraph(container, data, {
-        person: '--hub-graph-person',
-        company: '--hub-graph-company',
+        person: { colorVar: '--hub-graph-person' },
+        company: { colorVar: '--hub-graph-company', shape: 'round-rectangle' },
       });
     }
   </script>

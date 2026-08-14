@@ -16,6 +16,15 @@ export interface GraphEdge {
   source: string;
   target: string;
   label: string;
+  /**
+   * 이 관계선만의 유효 기간(선택). 두 노드가 둘 다 살아있는 기간이라도, 관계의 성격이
+   * 시기에 따라 바뀌는 경우(예: 봉신국 → 직할 속주) 같은 두 노드 사이에 start/end가 다른
+   * 엣지를 여러 개 두는 식으로 표현한다. 없으면 두 노드가 둘 다 활성인 동안 항상 표시된다.
+   */
+  start?: number;
+  end?: number;
+  /** 관계의 성격(선택, 자유 문자열: 예 "우호"/"적대"/"복속" 등). 엣지 색 구분에 쓸 수 있다. */
+  kind?: string;
 }
 
 export interface GraphData {

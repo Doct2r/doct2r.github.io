@@ -1,6 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
 import graphData from '../../data/bible-graph.json';
+import { getTimeRange, yearToPercent } from '../../lib/graph-timeline';
+import type { GraphData } from '../../lib/graph-types';
+
+// 구약/신약 전환점(기원후 0년) 표시 위치는 데이터의 연도 범위로 정해지므로 빌드 타임에 계산해 둔다.
+const range = getTimeRange(graphData as GraphData);
+const eraMarkerPct = range ? yearToPercent(0, range) : null;
 ---
 <Base title="성경 관계도 — Doct2r" description="시대별 인물·왕국의 변화를 시간 바로 훑어보는 관계도 (근사 연대)">
   <header>
@@ -14,12 +20,20 @@ import graphData from '../../data/bible-graph.json';
   <div id="cy"></div>
   <ul class="legend">
     <li><span class="dot person"></span> 인물</li>
-    <li><span class="dot polity"></span> 왕국·제국</li>
+    <li><span class="dot group"></span> 집단(왕국·제국)</li>
+    <li><span class="dot place"></span> 지역</li>
   </ul>
 
   <div class="timebar">
     <span id="year-label" class="year-label">–</span>
-    <input id="year-range" type="range" step="1" />
+    <div class="track">
+      {eraMarkerPct !== null && (
+        <div class="era-marker" style={`left:${eraMarkerPct}%`}>
+          <span class="era-marker-label">구약 ↔ 신약</span>
+        </div>
+      )}
+      <input id="year-range" type="range" step="1" />
+    </div>
   </div>
 
   <script is:inline type="application/json" id="graph-data" set:html={JSON.stringify(graphData)} />
@@ -37,8 +51,9 @@ import graphData from '../../data/bible-graph.json';
 
     if (container) {
       const cy = createThemedGraph(container, data, {
-        person: '--hub-graph-person',
-        polity: '--hub-graph-polity',
+        person: { colorVar: '--hub-graph-person' },
+        group: { colorVar: '--hub-graph-group', shape: 'round-rectangle' },
+        place: { colorVar: '--hub-graph-place', shape: 'diamond' },
       });
 
       const range = getTimeRange(data);
@@ -100,23 +115,50 @@ import graphData from '../../data/bible-graph.json';
   .dot.person {
     background: var(--hub-graph-person);
   }
-  .dot.polity {
-    background: var(--hub-graph-polity);
+  .dot.group {
+    background: var(--hub-graph-group);
     border-radius: 2px;
+  }
+  .dot.place {
+    background: var(--hub-graph-place);
+    border-radius: 2px;
+    transform: rotate(45deg);
+    width: 8px;
+    height: 8px;
   }
   .timebar {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1rem 2rem 2rem;
+    padding: 1rem 2rem 2.5rem;
   }
   .year-label {
     min-width: 8rem;
     font-variant-numeric: tabular-nums;
     font-weight: 600;
   }
-  #year-range {
+  .track {
+    position: relative;
     flex: 1;
-    accent-color: var(--hub-graph-polity);
+  }
+  #year-range {
+    width: 100%;
+    accent-color: var(--hub-graph-group);
+  }
+  .era-marker {
+    position: absolute;
+    top: -0.6rem;
+    bottom: -0.6rem;
+    width: 0;
+    border-left: 2px dashed var(--hub-text-muted);
+    pointer-events: none;
+  }
+  .era-marker-label {
+    position: absolute;
+    top: -1.3rem;
+    left: 0.4rem;
+    font-size: 0.7rem;
+    color: var(--hub-text-muted);
+    white-space: nowrap;
   }
 </style>

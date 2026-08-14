@@ -1,9 +1,16 @@
 import cytoscape from 'cytoscape';
 import type { GraphData } from './graph-types';
 
+export interface TypeStyle {
+  /** 이 type의 색을 읽어올 CSS 변수 이름(예: "--hub-graph-person") */
+  colorVar: string;
+  /** 기본값 'ellipse'. 색만으로는 구분이 약한 타입(집단/지역 등)을 도형으로도 구별한다. */
+  shape?: cytoscape.Css.NodeShape;
+}
+
 export interface ThemedGraphOptions {
-  /** 노드의 type 값(예: "person") → 색을 읽어올 CSS 변수 이름(예: "--hub-graph-person") */
-  typeColorVar: Record<string, string>;
+  /** 노드의 type 값(예: "person") → 스타일(색·도형) */
+  typeStyle: Record<string, TypeStyle>;
   /** 기본값: --hub-graph-edge */
   edgeColorVar?: string;
   /** 기본값: --hub-graph-label (노드·엣지 라벨 공통) */
@@ -24,15 +31,16 @@ function readVar(name: string): string {
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 }
 
-function buildStyle(opts: Required<Omit<ThemedGraphOptions, 'typeColorVar'>> & { typeColorVar: Record<string, string> }): cytoscape.StylesheetJson {
+function buildStyle(opts: Required<Omit<ThemedGraphOptions, 'typeStyle'>> & { typeStyle: Record<string, TypeStyle> }): cytoscape.StylesheetJson {
   const edge = readVar(opts.edgeColorVar);
   const label = readVar(opts.labelColorVar);
   const edgeLabelBg = readVar(opts.edgeLabelBgVar);
 
-  const nodeStyles: cytoscape.StylesheetJson = Object.entries(opts.typeColorVar).map(([type, colorVar]) => ({
+  const nodeStyles: cytoscape.StylesheetJson = Object.entries(opts.typeStyle).map(([type, style]) => ({
     selector: `node[type="${type}"]`,
     style: {
-      'background-color': readVar(colorVar),
+      'background-color': readVar(style.colorVar),
+      shape: style.shape ?? 'ellipse',
       label: 'data(label)',
       color: label,
       'font-size': '12px',
@@ -73,11 +81,11 @@ function buildStyle(opts: Required<Omit<ThemedGraphOptions, 'typeColorVar'>> & {
 export function createThemedGraph(
   container: HTMLElement,
   data: GraphData,
-  typeColorVar: Record<string, string>,
-  opts: Partial<Omit<ThemedGraphOptions, 'typeColorVar'>> = {},
+  typeStyle: Record<string, TypeStyle>,
+  opts: Partial<Omit<ThemedGraphOptions, 'typeStyle'>> = {},
 ): cytoscape.Core {
   const resolved = {
-    typeColorVar,
+    typeStyle,
     edgeColorVar: opts.edgeColorVar ?? DEFAULTS.edgeColorVar,
     labelColorVar: opts.labelColorVar ?? DEFAULTS.labelColorVar,
     edgeLabelBgVar: opts.edgeLabelBgVar ?? DEFAULTS.edgeLabelBgVar,
@@ -86,7 +94,11 @@ export function createThemedGraph(
 
   const elements: cytoscape.ElementDefinition[] = [
     ...data.nodes.map((n) => ({ data: { id: n.id, label: n.label, type: n.type } })),
-    ...data.edges.map((e) => ({ data: { source: e.source, target: e.target, label: e.label } })),
+    // start/end를 엣지 data에도 실어 둬서, 시간 바가 엣지 자신의 유효기간을 즉시 읽을 수 있게 한다
+    // (같은 두 노드 사이라도 시기별로 다른 엣지를 두면 관계의 성격이 바뀌는 걸 표현할 수 있다).
+    ...data.edges.map((e) => ({
+      data: { source: e.source, target: e.target, label: e.label, start: e.start, end: e.end, kind: e.kind },
+    })),
   ];
 
   const cy = cytoscape({
