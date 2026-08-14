@@ -56,12 +56,16 @@ function buildStyle(opts: Required<Omit<ThemedGraphOptions, 'typeStyle'>> & { ty
       // 자기 type 색은 유지하되, 안은 비치게 하고 점선 테두리를 둘러 "그룹" 느낌을 낸다.
       selector: ':parent',
       style: {
-        'background-opacity': 0.15,
-        'border-width': 1.5,
+        'background-opacity': 0.2,
+        'border-width': 2,
         'border-style': 'dashed',
         'border-color': edge,
+        'border-opacity': 0.9,
+        padding: '18px',
         'text-valign': 'top',
-        'text-margin-y': -4,
+        'text-margin-y': -6,
+        'font-size': '11px',
+        'font-weight': 600,
       },
     },
     {
