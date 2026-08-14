@@ -41,9 +41,11 @@ function buildStyle(opts: Required<Omit<ThemedGraphOptions, 'typeStyle'>> & { ty
     style: {
       'background-color': readVar(style.colorVar),
       shape: style.shape ?? 'ellipse',
+      width: 34,
+      height: 34,
       label: 'data(label)',
       color: label,
-      'font-size': '12px',
+      'font-size': '13px',
       'text-valign': 'bottom',
       'text-margin-y': 6,
     },
@@ -125,9 +127,53 @@ export function createThemedGraph(
     layout: resolved.layout,
   });
 
+  // 노드가 91개까지 늘어나면서, 그 시점에 한둘만 보여도 "전체 91개 기준으로 짜인 레이아웃"
+  // 안에서 멀리 떨어져 있으면 fit()이 계속 축소해 점처럼 작아지는 문제가 있었다. 레이아웃
+  // 직후(=전체를 다 보여줄 때)의 줌을 하한선으로 박아 두면, 그보다 더 작아질 일이 없다 —
+  // 부분집합의 바운딩박스는 전체 그래프의 바운딩박스보다 클 수 없기 때문이다.
+  cy.minZoom(cy.zoom());
+
   window.addEventListener('theme-change', () => {
     cy.style(buildStyle(resolved));
   });
 
   return cy;
+}
+
+/**
+ * 그래프 위에 +/−/맞춤 버튼을 얹는다. 모바일에서는 트랙패드 핀치나 마우스 휠 줌이
+ * 없거나 페이지 스크롤과 겹치기 쉬워서, 손가락 탭만으로 확대·축소·다시 맞추기가
+ * 가능한 명시적 버튼을 둔다. wrapper는 position:relative여야 버튼이 그래프 위에 겹쳐진다.
+ */
+export function createZoomControls(
+  wrapper: HTMLElement,
+  cy: cytoscape.Core,
+  getFitTarget: () => cytoscape.NodeCollection | cytoscape.CollectionReturnValue,
+): void {
+  const bar = document.createElement('div');
+  bar.className = 'hub-zoom-controls';
+
+  const make = (label: string, title: string, onClick: () => void) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = label;
+    btn.title = title;
+    btn.setAttribute('aria-label', title);
+    btn.addEventListener('click', onClick);
+    bar.appendChild(btn);
+    return btn;
+  };
+
+  make('＋', '확대', () => {
+    cy.zoom({ level: cy.zoom() * 1.3, renderedPosition: { x: cy.width() / 2, y: cy.height() / 2 } });
+  });
+  make('－', '축소', () => {
+    cy.zoom({ level: cy.zoom() / 1.3, renderedPosition: { x: cy.width() / 2, y: cy.height() / 2 } });
+  });
+  make('⤢', '화면에 맞추기', () => {
+    const target = getFitTarget();
+    if (target.length > 0) cy.fit(target, 60);
+  });
+
+  wrapper.appendChild(bar);
 }

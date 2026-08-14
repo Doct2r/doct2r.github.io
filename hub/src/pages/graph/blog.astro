@@ -10,7 +10,9 @@ import graphData from '../../data/blog-graph.json';
       지금은 구조 확인용 더미 데이터입니다. 실제 500편에서 인물·기업·관계를 추출하는 작업은 별도로 진행됩니다.
     </p>
   </header>
-  <div id="cy"></div>
+  <div class="graph-wrap">
+    <div id="cy"></div>
+  </div>
   <ul class="legend">
     <li><span class="dot person"></span> 인물</li>
     <li><span class="dot company"></span> 기업</li>
@@ -19,18 +21,22 @@ import graphData from '../../data/blog-graph.json';
   <script is:inline type="application/json" id="graph-data" set:html={JSON.stringify(graphData)} />
 
   <script>
-    import { createThemedGraph } from '../../lib/cytoscape-theme';
+    import { createThemedGraph, createZoomControls } from '../../lib/cytoscape-theme';
     import type { GraphData } from '../../lib/graph-types';
 
     const raw = document.getElementById('graph-data')?.textContent ?? '{"nodes":[],"edges":[]}';
     const data = JSON.parse(raw) as GraphData;
+    const wrapper = document.querySelector('.graph-wrap') as HTMLElement | null;
     const container = document.getElementById('cy');
 
     if (container) {
-      createThemedGraph(container, data, {
+      const cy = createThemedGraph(container, data, {
         person: { colorVar: '--hub-graph-person' },
         company: { colorVar: '--hub-graph-company', shape: 'round-rectangle' },
       });
+      if (wrapper) {
+        createZoomControls(wrapper, cy, () => cy.elements());
+      }
     }
   </script>
 </Base>
@@ -52,10 +58,14 @@ import graphData from '../../data/blog-graph.json';
     font-size: 0.85rem;
     max-width: 640px;
   }
+  .graph-wrap {
+    position: relative;
+  }
   #cy {
     width: 100%;
     height: 70vh;
     background: var(--hub-bg);
+    touch-action: none;
   }
   .legend {
     list-style: none;
@@ -78,5 +88,18 @@ import graphData from '../../data/blog-graph.json';
   .dot.company {
     background: var(--hub-graph-company);
     border-radius: 2px;
+  }
+
+  @media (max-width: 640px) {
+    header {
+      padding: 1rem 1rem 0.5rem;
+    }
+    #cy {
+      height: 60vh;
+    }
+    .legend {
+      padding: 0.5rem 1rem 1.25rem;
+      flex-wrap: wrap;
+    }
   }
 </style>

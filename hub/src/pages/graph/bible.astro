@@ -29,7 +29,9 @@ const writingBands = writingPeriodsData.periods.map((p) => {
       인물·왕국만 진하게 표시됩니다.
     </p>
   </header>
-  <div id="cy"></div>
+  <div class="graph-wrap">
+    <div id="cy"></div>
+  </div>
   <ul class="legend">
     <li><span class="dot person"></span> 인물</li>
     <li><span class="dot group"></span> 집단(왕국·제국)</li>
@@ -80,7 +82,7 @@ const writingBands = writingPeriodsData.periods.map((p) => {
   />
 
   <script>
-    import { createThemedGraph } from '../../lib/cytoscape-theme';
+    import { createThemedGraph, createZoomControls } from '../../lib/cytoscape-theme';
     import { applyTimeFilter, formatYear, buildTimelineScale, collectYearBreakpoints } from '../../lib/graph-timeline';
     import type { GraphData } from '../../lib/graph-types';
 
@@ -88,6 +90,7 @@ const writingBands = writingPeriodsData.periods.map((p) => {
     const data = JSON.parse(raw) as GraphData;
     const writingRaw = document.getElementById('writing-periods-data')?.textContent ?? '{"periods":[]}';
     const writingPeriods = (JSON.parse(writingRaw) as { periods: { start: number; end: number }[] }).periods;
+    const wrapper = document.querySelector('.graph-wrap') as HTMLElement | null;
     const container = document.getElementById('cy');
     const rangeInput = document.getElementById('year-range') as HTMLInputElement | null;
     const yearLabel = document.getElementById('year-label');
@@ -106,6 +109,10 @@ const writingBands = writingPeriodsData.periods.map((p) => {
         place: { colorVar: '--hub-graph-place', shape: 'diamond' },
         event: { colorVar: '--hub-graph-event', shape: 'star' },
       });
+
+      if (wrapper) {
+        createZoomControls(wrapper, cy, () => cy.nodes(':visible'));
+      }
 
       if (rangeInput && yearLabel) {
         rangeInput.value = '0';
@@ -157,10 +164,15 @@ const writingBands = writingPeriodsData.periods.map((p) => {
     font-size: 0.85rem;
     max-width: 640px;
   }
+  .graph-wrap {
+    position: relative;
+  }
   #cy {
     width: 100%;
     height: 62vh;
     background: var(--hub-bg);
+    /* 모바일에서 손가락 드래그를 페이지 스크롤이 아니라 그래프 팬(pan)으로 넘겨준다 */
+    touch-action: none;
   }
   .legend {
     list-style: none;
@@ -295,7 +307,9 @@ const writingBands = writingPeriodsData.periods.map((p) => {
   .era-marker-label {
     position: absolute;
     top: -1.3rem;
-    left: 0.4rem;
+    /* 이 데이터셋에서는 전환점이 대체로 바 오른쪽 끝 근처라, 왼쪽으로 붙이면(right 기준)
+       라벨이 트랙 밖으로 잘릴 일이 없다. */
+    right: 0.4rem;
     font-size: 0.7rem;
     color: var(--hub-text-muted);
     white-space: nowrap;
@@ -365,5 +379,64 @@ const writingBands = writingPeriodsData.periods.map((p) => {
     width: 0;
     border-left: 2px solid var(--hub-graph-person);
     pointer-events: none;
+  }
+
+  @media (max-width: 640px) {
+    header {
+      padding: 1rem 1rem 0.5rem;
+    }
+    .notice {
+      font-size: 0.8rem;
+    }
+    #cy {
+      height: 52vh;
+    }
+    .legend {
+      padding: 0.5rem 1rem;
+      gap: 0.6rem 1rem;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+    }
+    .timebar {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.4rem;
+      padding: 0.75rem 1rem 2.25rem;
+    }
+    .year-label {
+      min-width: 0;
+      text-align: center;
+    }
+    /* 터치로 잡기 쉽게 손잡이·트랙을 데스크톱보다 크게 */
+    #year-range {
+      height: 2rem;
+    }
+    #year-range::-webkit-slider-thumb {
+      width: 22px;
+      height: 22px;
+      margin-top: -8px;
+    }
+    #year-range::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+    }
+    .writing-toggle-row {
+      padding: 0 1rem;
+    }
+    .writing-periods {
+      padding: 0.75rem 1rem 1.5rem;
+    }
+    .wp-row {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.2rem;
+      margin-bottom: 0.7rem;
+    }
+    .wp-label {
+      min-width: 0;
+    }
+    .wp-cursor-row .wp-label {
+      display: none;
+    }
   }
 </style>
