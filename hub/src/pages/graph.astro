@@ -1,109 +1,123 @@
 ---
+import Base from '../layouts/Base.astro';
 import graphData from '../data/graph-data.json';
 ---
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>관계도 — Doct2r</title>
-    <meta name="description" content="블로그에 등장한 인물·기업 관계 그래프 (더미 데이터)" />
-  </head>
-  <body>
-    <header>
-      <a href="/" class="back">← 홈</a>
-      <h1>관계도</h1>
-      <p class="notice">
-        지금은 구조 확인용 더미 데이터입니다. 실제 500편에서 인물·기업·관계를 추출하는 작업은 별도로 진행됩니다.
-      </p>
-    </header>
-    <div id="cy"></div>
-    <ul class="legend">
-      <li><span class="dot person"></span> 인물</li>
-      <li><span class="dot company"></span> 기업</li>
-    </ul>
+<Base title="관계도 — Doct2r" description="블로그에 등장한 인물·기업 관계 그래프 (더미 데이터)">
+  <header>
+    <a href="/" class="back">← 홈</a>
+    <h1>관계도</h1>
+    <p class="notice">
+      지금은 구조 확인용 더미 데이터입니다. 실제 500편에서 인물·기업·관계를 추출하는 작업은 별도로 진행됩니다.
+    </p>
+  </header>
+  <div id="cy"></div>
+  <ul class="legend">
+    <li><span class="dot person"></span> 인물</li>
+    <li><span class="dot company"></span> 기업</li>
+  </ul>
 
-    <script type="application/json" id="graph-data" set:html={JSON.stringify(graphData)} />
+  <script type="application/json" id="graph-data" set:html={JSON.stringify(graphData)} />
 
-    <script>
-      import cytoscape from 'cytoscape';
+  <script>
+    import cytoscape, { type Core } from 'cytoscape';
 
-      const raw = document.getElementById('graph-data')?.textContent ?? '{"nodes":[],"edges":[]}';
-      const data = JSON.parse(raw);
+    type NodeType = { id: string; label: string; type: 'person' | 'company' };
+    type EdgeType = { source: string; target: string; label: string };
 
-      const elements = [
-        ...data.nodes.map((n: { id: string; label: string; type: string }) => ({
-          data: { id: n.id, label: n.label, type: n.type },
-        })),
-        ...data.edges.map((e: { source: string; target: string; label: string }) => ({
-          data: { source: e.source, target: e.target, label: e.label },
-        })),
+    const raw = document.getElementById('graph-data')?.textContent ?? '{"nodes":[],"edges":[]}';
+    const data = JSON.parse(raw) as { nodes: NodeType[]; edges: EdgeType[] };
+
+    const elements = [
+      ...data.nodes.map((n) => ({ data: { id: n.id, label: n.label, type: n.type } })),
+      ...data.edges.map((e) => ({ data: { source: e.source, target: e.target, label: e.label } })),
+    ];
+
+    // Cytoscape는 캔버스에 직접 그리기 때문에 CSS 변수(var(--x))를 이해하지 못한다.
+    // 매번 실제 계산된 색상값을 읽어와 스타일 배열을 새로 만들어야 한다.
+    function readTokens() {
+      const cs = getComputedStyle(document.documentElement);
+      const v = (name: string) => cs.getPropertyValue(name).trim();
+      return {
+        person: v('--hub-graph-person'),
+        company: v('--hub-graph-company'),
+        edge: v('--hub-graph-edge'),
+        label: v('--hub-graph-label'),
+        edgeLabelBg: v('--hub-graph-edge-label-bg'),
+      };
+    }
+
+    function buildStyle(tokens: ReturnType<typeof readTokens>) {
+      return [
+        {
+          selector: 'node[type="person"]',
+          style: {
+            'background-color': tokens.person,
+            label: 'data(label)',
+            color: tokens.label,
+            'font-size': '12px',
+            'text-valign': 'bottom',
+            'text-margin-y': 6,
+          },
+        },
+        {
+          selector: 'node[type="company"]',
+          style: {
+            'background-color': tokens.company,
+            label: 'data(label)',
+            color: tokens.label,
+            'font-size': '12px',
+            'text-valign': 'bottom',
+            'text-margin-y': 6,
+            shape: 'round-rectangle',
+          },
+        },
+        {
+          selector: 'edge',
+          style: {
+            width: 2,
+            'line-color': tokens.edge,
+            'target-arrow-color': tokens.edge,
+            'target-arrow-shape': 'triangle',
+            'curve-style': 'bezier',
+            label: 'data(label)',
+            'font-size': '10px',
+            color: tokens.label,
+            'text-background-color': tokens.edgeLabelBg,
+            'text-background-opacity': 0.85,
+            'text-background-padding': '2px',
+          },
+        },
       ];
+    }
 
-      cytoscape({
+    let cy: Core | null = null;
+
+    function render() {
+      const tokens = readTokens();
+      if (cy) {
+        cy.style(buildStyle(tokens) as never);
+        return;
+      }
+      cy = cytoscape({
         container: document.getElementById('cy'),
         elements,
-        style: [
-          {
-            selector: 'node[type="person"]',
-            style: {
-              'background-color': '#e07a5f',
-              label: 'data(label)',
-              color: '#f2f2f2',
-              'font-size': '12px',
-              'text-valign': 'bottom',
-              'text-margin-y': 6,
-            },
-          },
-          {
-            selector: 'node[type="company"]',
-            style: {
-              'background-color': '#4a7c9b',
-              label: 'data(label)',
-              color: '#f2f2f2',
-              'font-size': '12px',
-              'text-valign': 'bottom',
-              'text-margin-y': 6,
-              shape: 'round-rectangle',
-            },
-          },
-          {
-            selector: 'edge',
-            style: {
-              width: 2,
-              'line-color': '#4a5468',
-              'target-arrow-color': '#4a5468',
-              'target-arrow-shape': 'triangle',
-              'curve-style': 'bezier',
-              label: 'data(label)',
-              'font-size': '10px',
-              color: '#a8adb8',
-              'text-background-color': '#0b0d12',
-              'text-background-opacity': 0.8,
-              'text-background-padding': '2px',
-            },
-          },
-        ],
+        style: buildStyle(tokens) as never,
         layout: { name: 'cose', animate: false, padding: 40 },
       });
-    </script>
-  </body>
-</html>
+    }
+
+    render();
+    // 토글로 테마가 바뀌면(같은 페이지 안이든, storage 이벤트로 다른 탭 반영이든) 즉시 다시 칠한다.
+    window.addEventListener('theme-change', render);
+  </script>
+</Base>
 
 <style>
-  :root {
-    color-scheme: light dark;
-  }
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
-    background: #0b0d12;
-    color: #f2f2f2;
-  }
   header {
     padding: 1.5rem 2rem 0.5rem;
   }
   .back {
-    color: #a8adb8;
+    color: var(--hub-text-muted);
     text-decoration: none;
     font-size: 0.9rem;
   }
@@ -111,13 +125,14 @@ import graphData from '../data/graph-data.json';
     margin: 0.5rem 0 0.25rem;
   }
   .notice {
-    color: #a8adb8;
+    color: var(--hub-text-muted);
     font-size: 0.85rem;
     max-width: 640px;
   }
   #cy {
     width: 100%;
     height: 70vh;
+    background: var(--hub-bg);
   }
   .legend {
     list-style: none;
@@ -134,11 +149,11 @@ import graphData from '../data/graph-data.json';
     border-radius: 50%;
     margin-right: 0.4rem;
   }
-  .dot.person { background: #e07a5f; }
-  .dot.company { background: #4a7c9b; border-radius: 2px; }
-
-  @media (prefers-color-scheme: light) {
-    body { background: #fafafa; color: #16181d; }
-    .notice, .back { color: #565d6b; }
+  .dot.person {
+    background: var(--hub-graph-person);
+  }
+  .dot.company {
+    background: var(--hub-graph-company);
+    border-radius: 2px;
   }
 </style>
