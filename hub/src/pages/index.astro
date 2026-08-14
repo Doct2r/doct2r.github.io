@@ -1,0 +1,95 @@
+---
+const links = [
+  { href: '/blog/', title: '블로그', desc: '기술과 생각을 정리하는 500편+의 글' },
+  { href: '/graph', title: '관계도', desc: '블로그에 등장한 인물·기업의 관계 그래프' },
+];
+---
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doct2r</title>
+    <meta name="description" content="Doct2r의 홈 — 블로그와 관계도 그래프로 이어지는 허브" />
+  </head>
+  <body>
+    <main class="hero">
+      <h1>Doct2r</h1>
+      <p class="tagline">기술과 생각을 기록하고, 그 기록들이 서로 어떻게 얽혀 있는지 들여다봅니다.</p>
+      <nav class="cards">
+        {links.map((l) => (
+          <a class="card" href={l.href}>
+            <span class="card-title">{l.title}</span>
+            <span class="card-desc">{l.desc}</span>
+          </a>
+        ))}
+      </nav>
+    </main>
+  </body>
+</html>
+
+<style>
+  :root {
+    color-scheme: light dark;
+  }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+    background: #0b0d12;
+    color: #f2f2f2;
+  }
+  .hero {
+    max-width: 640px;
+    padding: 2rem;
+    text-align: center;
+  }
+  h1 {
+    font-size: 3rem;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .tagline {
+    color: #a8adb8;
+    margin: 0 0 2.5rem;
+    line-height: 1.6;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid #262b36;
+    background: #12151c;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: #4a5468;
+  }
+  .card-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+  .card-desc {
+    font-size: 0.9rem;
+    color: #a8adb8;
+  }
+
+  @media (prefers-color-scheme: light) {
+    body { background: #fafafa; color: #16181d; }
+    .card { background: #ffffff; border-color: #e4e6ea; }
+    .card:hover { border-color: #b9bfca; }
+    .tagline, .card-desc { color: #565d6b; }
+  }
+</style>

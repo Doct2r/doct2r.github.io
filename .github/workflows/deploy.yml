@@ -1,4 +1,4 @@
-name: Deploy Hugo to GitHub Pages
+name: Deploy Site to GitHub Pages
 
 on:
   push:
@@ -24,6 +24,13 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: hub/package-lock.json
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
@@ -36,16 +43,34 @@ jobs:
         with:
           enablement: true
 
-      - name: Build
-        run: hugo --minify --buildFuture --baseURL "${{ steps.pages.outputs.base_url }}/"
+      - name: Install hub dependencies
+        working-directory: hub
+        run: npm ci
 
-      - name: Index with Pagefind
-        run: npx pagefind --source public
+      - name: Build hub (root site)
+        working-directory: hub
+        run: npm run build
+
+      - name: Build blog (Hugo)
+        run: |
+          hugo --source blog --minify --buildFuture \
+               --baseURL "${{ steps.pages.outputs.base_url }}/blog/"
+
+      - name: Index blog with Pagefind
+        run: npx pagefind --site blog/public --output-subdir _pagefind
+
+      - name: Assemble combined site
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site/blog
+          cp -r hub/dist/. _site/
+          cp -r blog/public/. _site/blog/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: ./_site
 
   deploy:
     environment:

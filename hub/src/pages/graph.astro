@@ -1,0 +1,144 @@
+---
+import graphData from '../data/graph-data.json';
+---
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>관계도 — Doct2r</title>
+    <meta name="description" content="블로그에 등장한 인물·기업 관계 그래프 (더미 데이터)" />
+  </head>
+  <body>
+    <header>
+      <a href="/" class="back">← 홈</a>
+      <h1>관계도</h1>
+      <p class="notice">
+        지금은 구조 확인용 더미 데이터입니다. 실제 500편에서 인물·기업·관계를 추출하는 작업은 별도로 진행됩니다.
+      </p>
+    </header>
+    <div id="cy"></div>
+    <ul class="legend">
+      <li><span class="dot person"></span> 인물</li>
+      <li><span class="dot company"></span> 기업</li>
+    </ul>
+
+    <script type="application/json" id="graph-data" set:html={JSON.stringify(graphData)} />
+
+    <script>
+      import cytoscape from 'cytoscape';
+
+      const raw = document.getElementById('graph-data')?.textContent ?? '{"nodes":[],"edges":[]}';
+      const data = JSON.parse(raw);
+
+      const elements = [
+        ...data.nodes.map((n: { id: string; label: string; type: string }) => ({
+          data: { id: n.id, label: n.label, type: n.type },
+        })),
+        ...data.edges.map((e: { source: string; target: string; label: string }) => ({
+          data: { source: e.source, target: e.target, label: e.label },
+        })),
+      ];
+
+      cytoscape({
+        container: document.getElementById('cy'),
+        elements,
+        style: [
+          {
+            selector: 'node[type="person"]',
+            style: {
+              'background-color': '#e07a5f',
+              label: 'data(label)',
+              color: '#f2f2f2',
+              'font-size': '12px',
+              'text-valign': 'bottom',
+              'text-margin-y': 6,
+            },
+          },
+          {
+            selector: 'node[type="company"]',
+            style: {
+              'background-color': '#4a7c9b',
+              label: 'data(label)',
+              color: '#f2f2f2',
+              'font-size': '12px',
+              'text-valign': 'bottom',
+              'text-margin-y': 6,
+              shape: 'round-rectangle',
+            },
+          },
+          {
+            selector: 'edge',
+            style: {
+              width: 2,
+              'line-color': '#4a5468',
+              'target-arrow-color': '#4a5468',
+              'target-arrow-shape': 'triangle',
+              'curve-style': 'bezier',
+              label: 'data(label)',
+              'font-size': '10px',
+              color: '#a8adb8',
+              'text-background-color': '#0b0d12',
+              'text-background-opacity': 0.8,
+              'text-background-padding': '2px',
+            },
+          },
+        ],
+        layout: { name: 'cose', animate: false, padding: 40 },
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  :root {
+    color-scheme: light dark;
+  }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+    background: #0b0d12;
+    color: #f2f2f2;
+  }
+  header {
+    padding: 1.5rem 2rem 0.5rem;
+  }
+  .back {
+    color: #a8adb8;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  h1 {
+    margin: 0.5rem 0 0.25rem;
+  }
+  .notice {
+    color: #a8adb8;
+    font-size: 0.85rem;
+    max-width: 640px;
+  }
+  #cy {
+    width: 100%;
+    height: 70vh;
+  }
+  .legend {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.5rem 2rem 1.5rem;
+    margin: 0;
+    font-size: 0.85rem;
+  }
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 0.4rem;
+  }
+  .dot.person { background: #e07a5f; }
+  .dot.company { background: #4a7c9b; border-radius: 2px; }
+
+  @media (prefers-color-scheme: light) {
+    body { background: #fafafa; color: #16181d; }
+    .notice, .back { color: #565d6b; }
+  }
+</style>

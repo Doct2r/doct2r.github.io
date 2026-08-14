@@ -1,0 +1,23 @@
+{
+  "_comment": "더미 데이터입니다. 500편 포스트에서 인물·기업·관계를 실제로 추출하는 작업은 이번 범위 밖이며, 이후 별도 파이프라인이 이 파일과 같은 { nodes, edges } 형식으로 데이터를 채울 예정입니다.",
+  "nodes": [
+    { "id": "samsung", "label": "삼성그룹", "type": "company" },
+    { "id": "lee-byung-chul", "label": "이병철", "type": "person" },
+    { "id": "sk-group", "label": "SK그룹", "type": "company" },
+    { "id": "sk-hynix", "label": "SK하이닉스", "type": "company" },
+    { "id": "linkedin", "label": "링크드인", "type": "company" },
+    { "id": "reid-hoffman", "label": "리드 호프먼", "type": "person" },
+    { "id": "microsoft", "label": "마이크로소프트", "type": "company" },
+    { "id": "spacex", "label": "스페이스X", "type": "company" },
+    { "id": "elon-musk", "label": "일론 머스크", "type": "person" },
+    { "id": "discord", "label": "디스코드", "type": "company" }
+  ],
+  "edges": [
+    { "source": "lee-byung-chul", "target": "samsung", "label": "창업" },
+    { "source": "sk-group", "target": "sk-hynix", "label": "인수" },
+    { "source": "reid-hoffman", "target": "linkedin", "label": "창업" },
+    { "source": "microsoft", "target": "linkedin", "label": "인수" },
+    { "source": "elon-musk", "target": "spacex", "label": "창업" },
+    { "source": "microsoft", "target": "discord", "label": "인수 제안(거절)" }
+  ]
+}
