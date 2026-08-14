@@ -1,0 +1,33 @@
+{
+  "_comment": "연대는 학계·전통 사이에 이견이 있는 전통적 근사값(예: 출애굽 이른 연대설 vs 늦은 연대설 등)이며, 시간 바 기능을 보여주기 위한 1차 데이터셋이다. 인물은 대략적 활동/생존 시기, 왕국·제국은 존속 시기를 start~end(기원전은 음수)로 표시했다.",
+  "nodes": [
+    { "id": "abraham", "label": "아브라함", "type": "person", "start": -2000, "end": -1825 },
+    { "id": "isaac", "label": "이삭", "type": "person", "start": -1900, "end": -1720 },
+    { "id": "jacob", "label": "야곱", "type": "person", "start": -1800, "end": -1650 },
+    { "id": "joseph", "label": "요셉", "type": "person", "start": -1750, "end": -1650 },
+    { "id": "moses", "label": "모세", "type": "person", "start": -1350, "end": -1230 },
+    { "id": "david", "label": "다윗", "type": "person", "start": -1010, "end": -970 },
+    { "id": "solomon", "label": "솔로몬", "type": "person", "start": -970, "end": -931 },
+    { "id": "cyrus", "label": "키루스(고레스)", "type": "person", "start": -590, "end": -530 },
+    { "id": "israel-united", "label": "이스라엘왕국(통일)", "type": "polity", "start": -1050, "end": -931 },
+    { "id": "israel-north", "label": "이스라엘왕국(북)", "type": "polity", "start": -931, "end": -722 },
+    { "id": "judah-south", "label": "유다왕국(남)", "type": "polity", "start": -931, "end": -586 },
+    { "id": "assyria", "label": "아시리아제국", "type": "polity", "start": -900, "end": -609 },
+    { "id": "babylon", "label": "바빌로니아제국", "type": "polity", "start": -626, "end": -539 },
+    { "id": "persia", "label": "페르시아제국", "type": "polity", "start": -539, "end": -330 }
+  ],
+  "edges": [
+    { "source": "abraham", "target": "isaac", "label": "아버지" },
+    { "source": "isaac", "target": "jacob", "label": "아버지" },
+    { "source": "jacob", "target": "joseph", "label": "아버지" },
+    { "source": "david", "target": "solomon", "label": "아버지" },
+    { "source": "david", "target": "israel-united", "label": "왕" },
+    { "source": "solomon", "target": "israel-united", "label": "왕" },
+    { "source": "israel-united", "target": "israel-north", "label": "분열" },
+    { "source": "israel-united", "target": "judah-south", "label": "분열" },
+    { "source": "assyria", "target": "israel-north", "label": "정복" },
+    { "source": "babylon", "target": "judah-south", "label": "정복" },
+    { "source": "cyrus", "target": "persia", "label": "왕" },
+    { "source": "persia", "target": "babylon", "label": "정복" }
+  ]
+}

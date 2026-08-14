@@ -6,6 +6,10 @@ export interface GraphNode {
   id: string;
   label: string;
   type: string;
+  /** 등장 연도(선택). 기원전은 음수(예: 기원전 586년 = -586). 없으면 항상 표시된다. */
+  start?: number;
+  /** 퇴장 연도(선택). start만 있고 end가 없으면 start와 같은 것으로 취급한다. */
+  end?: number;
 }
 
 export interface GraphEdge {
