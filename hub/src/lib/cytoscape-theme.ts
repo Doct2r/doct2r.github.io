@@ -1,5 +1,8 @@
 import cytoscape from 'cytoscape';
+import fcose from 'cytoscape-fcose';
 import type { GraphData } from './graph-types';
+
+cytoscape.use(fcose);
 
 export interface TypeStyle {
   /** 이 type의 색을 읽어올 CSS 변수 이름(예: "--hub-graph-person") */
@@ -24,7 +27,12 @@ const DEFAULTS = {
   edgeColorVar: '--hub-graph-edge',
   labelColorVar: '--hub-graph-label',
   edgeLabelBgVar: '--hub-graph-edge-label-bg',
-  layout: { name: 'cose', animate: false, padding: 40 } as cytoscape.LayoutOptions,
+  // 기본 내장 cose는 노드가 많아지고(91개) 약하게만 연결된 노드(사도 12명, 사건 노드 등)가
+  // 늘어날수록 서로 밀어내는 힘이 누적돼 "밤하늘의 별"처럼 사방으로 흩어졌다 — gravity·
+  // componentSpacing을 아무리 조정해도 실행할 때마다 결과가 들쭉날쭉했다(헤드리스로 여러 번
+  // 돌려 바운딩박스 넓이가 수십~수억 단위로 요동치는 걸 확인). cose의 개선판인 fcose로
+  // 바꾸니 기본 옵션만으로도 8회 반복 모두 거의 같은 크기(1200×1000 안팎)로 수렴했다.
+  layout: { name: 'fcose', animate: false, padding: 40 } as cytoscape.LayoutOptions,
 };
 
 function readVar(name: string): string {
