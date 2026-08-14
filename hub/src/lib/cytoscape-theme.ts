@@ -52,6 +52,19 @@ function buildStyle(opts: Required<Omit<ThemedGraphOptions, 'typeStyle'>> & { ty
   return [
     ...nodeStyles,
     {
+      // 다른 노드가 parent로 지정한 노드는 자식들을 감싸는 컨테이너로도 그려진다(compound node).
+      // 자기 type 색은 유지하되, 안은 비치게 하고 점선 테두리를 둘러 "그룹" 느낌을 낸다.
+      selector: ':parent',
+      style: {
+        'background-opacity': 0.15,
+        'border-width': 1.5,
+        'border-style': 'dashed',
+        'border-color': edge,
+        'text-valign': 'top',
+        'text-margin-y': -4,
+      },
+    },
+    {
       selector: 'edge',
       style: {
         width: 2,
@@ -93,7 +106,7 @@ export function createThemedGraph(
   };
 
   const elements: cytoscape.ElementDefinition[] = [
-    ...data.nodes.map((n) => ({ data: { id: n.id, label: n.label, type: n.type } })),
+    ...data.nodes.map((n) => ({ data: { id: n.id, label: n.label, type: n.type, parent: n.parent } })),
     // start/end를 엣지 data에도 실어 둬서, 시간 바가 엣지 자신의 유효기간을 즉시 읽을 수 있게 한다
     // (같은 두 노드 사이라도 시기별로 다른 엣지를 두면 관계의 성격이 바뀌는 걸 표현할 수 있다).
     ...data.edges.map((e) => ({

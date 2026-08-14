@@ -10,6 +10,12 @@ export interface GraphNode {
   start?: number;
   /** 퇴장 연도(선택). start만 있고 end가 없으면 start와 같은 것으로 취급한다. */
   end?: number;
+  /**
+   * 이 노드가 속한 집단(다른 노드의 id, 선택). 인물+지역이 특정 국가·집단 소속임을 보여줄 때
+   * 쓴다 — cytoscape의 compound node 기능을 그대로 활용해, parent로 지정한 노드를 테두리로
+   * 감싸는 시각적 그룹으로 렌더링한다(예: 다윗·예루살렘의 parent를 "이스라엘왕국(통일)"로 지정).
+   */
+  parent?: string;
 }
 
 export interface GraphEdge {
