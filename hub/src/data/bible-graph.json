@@ -1,6 +1,9 @@
 {
-  "_comment": "연대는 학계·전통 사이에 이견이 있는 전통적 근사값(예: 출애굽 이른 연대설 vs 늦은 연대설, 사사기 각 사사의 정확한 재위 구간, 신약 사도들의 순교 연대 등)이며, 시간 바 기능을 보여주기 위한 데이터셋이다. type은 인물(person)·집단(group, 왕국·제국 등)·지역(place, 지리적 장소)으로 나눴다. 지역은 대체로 특정 시기에 국한되지 않으므로 start/end 없이 항상 표시되게 두었다. parent는 인물이 소속된 국가·집단을 cytoscape의 compound node로 묶어 보여주기 위한 것인데, cytoscape는 부모 노드가 시간 필터로 display:none이 되면 자식이 display:element라도 화면에서 사라지므로, 자기 활동 기간이 소속 집단의 존속 기간 안에 완전히 들어가는 인물에만 parent를 지정했다. 예루살렘처럼 기간이 없어 항상 표시돼야 하는 지역과, 예레미야·다니엘·키루스·헤롯처럼 활동 기간이 소속 집단의 존속 기간을 벗어나는 인물은 그래서 parent 없이 독립 노드로 뒀다. 로마-유대(judea-roman) 관계처럼 같은 두 대상이라도 시기에 따라 성격이 바뀌는 경우는, 하나의 엣지 라벨을 시간에 따라 바꾸는 대신 start/end가 다른 엣지 두 개(봉신국 → 직할 속주)를 두어 표현했다. 12사도는 개별 활동·순교 연대가 불확실해 예수와 동시대 인물로 보고 출생 연도를 대략 통일했다.",
+  "_comment": "연대는 학계·전통 사이에 이견이 있는 전통적 근사값(예: 출애굽 이른 연대설 vs 늦은 연대설, 사사기 각 사사의 정확한 재위 구간, 신약 사도들의 순교 연대, 창세기 초반 연대 등)이며, 시간 바 기능을 보여주기 위한 데이터셋이다. 태초·아담·하와·에덴은 역사적 실측 연대가 없어, 전통적 연대기(예: 어셔 연대기)에서 흔히 쓰는 상징적 연도(기원전 4000년경)를 그대로 빌려와 노아(기원전 2900년경) 이전 구간을 채웠다 — 다른 항목보다 훨씬 더 근사적이라는 점을 전제로 한다. type은 인물(person)·집단(group, 왕국·제국 등)·지역(place, 지리적 장소)·사건(event, 창조처럼 특정 인물·집단·장소로 분류하기 애매한 단일 사건)으로 나눴다. 지역은 대체로 특정 시기에 국한되지 않으므로 start/end 없이 항상 표시되게 두었다. parent는 인물이 소속된 국가·집단을 cytoscape의 compound node로 묶어 보여주기 위한 것인데, cytoscape는 부모 노드가 시간 필터로 display:none이 되면 자식이 display:element라도 화면에서 사라지므로, 자기 활동 기간이 소속 집단의 존속 기간 안에 완전히 들어가는 인물에만 parent를 지정했다. 예루살렘처럼 기간이 없어 항상 표시돼야 하는 지역과, 예레미야·다니엘·키루스·헤롯처럼 활동 기간이 소속 집단의 존속 기간을 벗어나는 인물은 그래서 parent 없이 독립 노드로 뒀다. 로마-유대(judea-roman) 관계처럼 같은 두 대상이라도 시기에 따라 성격이 바뀌는 경우는, 하나의 엣지 라벨을 시간에 따라 바꾸는 대신 start/end가 다른 엣지 두 개(봉신국 → 직할 속주)를 두어 표현했다. 12사도는 개별 활동·순교 연대가 불확실해 예수와 동시대 인물로 보고 출생 연도를 대략 통일했다.",
   "nodes": [
+    { "id": "genesis-creation", "label": "태초(천지창조)", "type": "event", "start": -4000, "end": -3970 },
+    { "id": "adam", "label": "아담", "type": "person", "start": -4000, "end": -3070 },
+    { "id": "eve", "label": "하와", "type": "person", "start": -4000, "end": -3050 },
     { "id": "noah", "label": "노아", "type": "person", "start": -2900, "end": -1950 },
     { "id": "abraham", "label": "아브라함", "type": "person", "start": -2000, "end": -1825 },
     { "id": "isaac", "label": "이삭", "type": "person", "start": -1900, "end": -1720 },
@@ -52,9 +55,16 @@
 
     { "id": "canaan", "label": "가나안", "type": "place" },
     { "id": "egypt", "label": "애굽(이집트)", "type": "place" },
-    { "id": "jerusalem", "label": "예루살렘", "type": "place" }
+    { "id": "jerusalem", "label": "예루살렘", "type": "place" },
+    { "id": "eden", "label": "에덴동산", "type": "place", "start": -4000, "end": -3970 }
   ],
   "edges": [
+    { "source": "genesis-creation", "target": "adam", "label": "창조" },
+    { "source": "genesis-creation", "target": "eve", "label": "창조" },
+    { "source": "adam", "target": "eve", "label": "배우자" },
+    { "source": "adam", "target": "eden", "label": "거주" },
+    { "source": "eve", "target": "eden", "label": "거주" },
+    { "source": "adam", "target": "noah", "label": "선조" },
     { "source": "noah", "target": "abraham", "label": "선조" },
     { "source": "abraham", "target": "isaac", "label": "아버지" },
     { "source": "isaac", "target": "jacob", "label": "아버지" },

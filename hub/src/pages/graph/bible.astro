@@ -32,6 +32,7 @@ const writingBands = range
     <li><span class="dot person"></span> 인물</li>
     <li><span class="dot group"></span> 집단(왕국·제국)</li>
     <li><span class="dot place"></span> 지역</li>
+    <li><span class="dot-star" aria-hidden="true">★</span> 사건</li>
   </ul>
 
   <div class="timebar">
@@ -94,6 +95,7 @@ const writingBands = range
         person: { colorVar: '--hub-graph-person' },
         group: { colorVar: '--hub-graph-group', shape: 'round-rectangle' },
         place: { colorVar: '--hub-graph-place', shape: 'diamond' },
+        event: { colorVar: '--hub-graph-event', shape: 'star' },
       });
 
       const range = getTimeRange(data);
@@ -182,6 +184,13 @@ const writingBands = range
     transform: rotate(45deg);
     width: 8px;
     height: 8px;
+  }
+  .dot-star {
+    display: inline-block;
+    margin-right: 0.3rem;
+    color: var(--hub-graph-event);
+    font-size: 0.9rem;
+    line-height: 1;
   }
   .timebar {
     display: flex;
