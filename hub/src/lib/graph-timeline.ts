@@ -15,10 +15,83 @@ export function getTimeRange(data: GraphData): { min: number; max: number } | nu
   return { min: Math.min(...years), max: Math.max(...years) };
 }
 
-/** 연도를 [min, max] 범위 안에서의 0~100 퍼센트 위치로 바꾼다. 시간 바 위에 특정 시점을 표시할 때 쓴다. */
-export function yearToPercent(year: number, range: { min: number; max: number }): number {
-  if (range.max === range.min) return 0;
-  return ((year - range.min) / (range.max - range.min)) * 100;
+export interface TimelineScale {
+  /** 실제 연도 → 시간 바 위 0~100 퍼센트 위치 */
+  toPercent(year: number): number;
+  /** 시간 바 위 0~100 퍼센트 위치 → 실제 연도 */
+  toYear(percent: number): number;
+}
+
+const DEFAULT_CAP_YEARS = 120;
+const DEFAULT_GAP_SHRINK = 0.05;
+
+/**
+ * 선형 축은 태초~노아처럼 사건이 거의 없는 수천 년짜리 공백을 실제 길이 그대로 잡아먹어서,
+ * 정작 인물·사건이 몰린 구간(왕국시대~신약)이 바의 한쪽 구석에 짓눌린다. 그렇다고 로그축처럼
+ * 한쪽 끝(예: 데이터의 최신 연도)을 기준으로 전체를 압축하면, 이번엔 그 기준점 근처의 다른
+ * 공백(예: 신약 이후~로마제국 멸망까지)이 오히려 늘어나 버린다.
+ * 그래서 "실제로 비어 있는 구간만" 눌러 담는 구간별(piecewise) 스케일을 쓴다: 연속된 두
+ * breakpoint 사이의 간격이 cap년 이하면 실제 길이 그대로, cap을 넘는 만큼은 shrink 비율로만
+ * 화면 폭에 반영한다. breakpoints는 그래프의 모든 노드·엣지 start/end, 집필 시기 구간,
+ * 구약/신약 전환점(0년)을 모아 만든다 — 이 값들이 곧 "실제로 뭔가 있는 지점"이기 때문이다.
+ */
+export function buildTimelineScale(
+  years: number[],
+  opts: { cap?: number; shrink?: number } = {},
+): TimelineScale {
+  const cap = opts.cap ?? DEFAULT_CAP_YEARS;
+  const shrink = opts.shrink ?? DEFAULT_GAP_SHRINK;
+  const sorted = Array.from(new Set(years)).sort((a, b) => a - b);
+
+  if (sorted.length < 2) {
+    const only = sorted[0] ?? 0;
+    return { toPercent: () => 0, toYear: () => only };
+  }
+
+  function segmentWidth(gap: number): number {
+    return gap <= cap ? gap : cap + (gap - cap) * shrink;
+  }
+
+  const cum: number[] = [0];
+  for (let i = 1; i < sorted.length; i++) {
+    cum.push(cum[i - 1] + segmentWidth(sorted[i] - sorted[i - 1]));
+  }
+  const total = cum[cum.length - 1] || 1;
+
+  function findSegment(value: number, arr: number[]): number {
+    let i = 0;
+    while (i < arr.length - 2 && arr[i + 1] < value) i++;
+    return i;
+  }
+
+  function toPercent(year: number): number {
+    if (year <= sorted[0]) return 0;
+    if (year >= sorted[sorted.length - 1]) return 100;
+    const i = findSegment(year, sorted);
+    const gap = sorted[i + 1] - sorted[i];
+    const frac = gap === 0 ? 0 : (year - sorted[i]) / gap;
+    return ((cum[i] + frac * segmentWidth(gap)) / total) * 100;
+  }
+
+  function toYear(percent: number): number {
+    const pos = (percent / 100) * total;
+    if (pos <= 0) return sorted[0];
+    if (pos >= total) return sorted[sorted.length - 1];
+    const i = findSegment(pos, cum);
+    const gap = sorted[i + 1] - sorted[i];
+    const width = segmentWidth(gap);
+    const frac = width === 0 ? 0 : (pos - cum[i]) / width;
+    return sorted[i] + frac * gap;
+  }
+
+  return { toPercent, toYear };
+}
+
+/** 그래프 데이터(+선택적으로 다른 연도 목록)에서 스케일을 만들 breakpoint 연도들을 모은다. */
+export function collectYearBreakpoints(data: GraphData, extra: number[] = []): number[] {
+  const fromNodes = data.nodes.flatMap((n) => (n.start === undefined ? [] : [n.start, n.end ?? n.start]));
+  const fromEdges = data.edges.flatMap((e) => (e.start === undefined ? [] : [e.start, e.end ?? e.start]));
+  return [...fromNodes, ...fromEdges, ...extra];
 }
 
 /**

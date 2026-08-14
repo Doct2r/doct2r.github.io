@@ -2,21 +2,23 @@
 import Base from '../../layouts/Base.astro';
 import graphData from '../../data/bible-graph.json';
 import writingPeriodsData from '../../data/bible-writing-periods.json';
-import { getTimeRange, yearToPercent } from '../../lib/graph-timeline';
+import { buildTimelineScale, collectYearBreakpoints } from '../../lib/graph-timeline';
 import type { GraphData } from '../../lib/graph-types';
 
-// 구약/신약 전환점(기원후 0년), 집필 시기 막대 위치는 모두 데이터의 연도 범위를 기준으로
-// 정해지므로 빌드 타임에 한 번만 계산해 둔다. 사건 시간 바와 같은 축을 쓰기 때문에,
-// 슬라이더가 가리키는 "지금"이 어떤 책이 이미 쓰였을 시점인지 그대로 겹쳐 볼 수 있다.
-const range = getTimeRange(graphData as GraphData);
-const eraMarkerPct = range ? yearToPercent(0, range) : null;
-const writingBands = range
-  ? writingPeriodsData.periods.map((p) => {
-      const left = yearToPercent(p.start, range);
-      const right = yearToPercent(p.end, range);
-      return { ...p, leftPct: left, widthPct: right - left };
-    })
-  : [];
+// 태초~노아처럼 사건이 거의 없는 수천 년짜리 공백이 선형 축에서 시간 바 대부분을 차지해버려서,
+// 실제로 인물·사건이 몰린 구간(왕국시대~신약)이 한쪽 구석에 짓눌리는 문제가 있었다. 그래서
+// 실제 데이터가 있는 지점(breakpoint)들만 모아 그 사이의 "빈 구간"을 압축하는 축을 쓴다.
+// 클라이언트 스크립트도 똑같은 breakpoint 집합으로 같은 축을 다시 만들어야 슬라이더 위치와
+// 여기서 미리 계산해 둔 구약/신약 표시선·집필 시기 막대 위치가 어긋나지 않는다.
+const writingYears = writingPeriodsData.periods.flatMap((p) => [p.start, p.end]);
+const breakpoints = collectYearBreakpoints(graphData as GraphData, [0, ...writingYears]);
+const scale = buildTimelineScale(breakpoints);
+const eraMarkerPct = scale.toPercent(0);
+const writingBands = writingPeriodsData.periods.map((p) => {
+  const left = scale.toPercent(p.start);
+  const right = scale.toPercent(p.end);
+  return { ...p, leftPct: left, widthPct: right - left };
+});
 ---
 <Base title="성경 관계도 — Doct2r" description="시대별 인물·왕국의 변화를 시간 바로 훑어보는 관계도 (근사 연대)">
   <header>
@@ -38,17 +40,10 @@ const writingBands = range
   <div class="timebar">
     <span id="year-label" class="year-label">–</span>
     <div class="track">
-      {eraMarkerPct !== null && (
-        <div class="era-marker" style={`left:${eraMarkerPct}%`}>
-          <span class="era-marker-label">구약 ↔ 신약</span>
-        </div>
-      )}
-      <input
-        id="year-range"
-        type="range"
-        step="1"
-        style={eraMarkerPct !== null ? `--era-pct:${eraMarkerPct}%` : undefined}
-      />
+      <div class="era-marker" style={`left:${eraMarkerPct}%`}>
+        <span class="era-marker-label">구약 ↔ 신약</span>
+      </div>
+      <input id="year-range" type="range" step="0.05" min="0" max="100" style={`--era-pct:${eraMarkerPct}%`} />
     </div>
   </div>
 
@@ -77,18 +72,32 @@ const writingBands = range
   </div>
 
   <script is:inline type="application/json" id="graph-data" set:html={JSON.stringify(graphData)} />
+  <script
+    is:inline
+    type="application/json"
+    id="writing-periods-data"
+    set:html={JSON.stringify(writingPeriodsData)}
+  />
 
   <script>
     import { createThemedGraph } from '../../lib/cytoscape-theme';
-    import { applyTimeFilter, getTimeRange, formatYear, yearToPercent } from '../../lib/graph-timeline';
+    import { applyTimeFilter, formatYear, buildTimelineScale, collectYearBreakpoints } from '../../lib/graph-timeline';
     import type { GraphData } from '../../lib/graph-types';
 
     const raw = document.getElementById('graph-data')?.textContent ?? '{"nodes":[],"edges":[]}';
     const data = JSON.parse(raw) as GraphData;
+    const writingRaw = document.getElementById('writing-periods-data')?.textContent ?? '{"periods":[]}';
+    const writingPeriods = (JSON.parse(writingRaw) as { periods: { start: number; end: number }[] }).periods;
     const container = document.getElementById('cy');
     const rangeInput = document.getElementById('year-range') as HTMLInputElement | null;
     const yearLabel = document.getElementById('year-label');
     const wpCursor = document.getElementById('wp-cursor');
+
+    // 빌드 타임(frontmatter)과 똑같은 breakpoint 집합으로 똑같은 압축 축을 다시 만든다 —
+    // 그래야 여기서 그리는 구약/신약 표시선·집필 시기 막대와 슬라이더 위치가 어긋나지 않는다.
+    const writingYears = writingPeriods.flatMap((p) => [p.start, p.end]);
+    const breakpoints = collectYearBreakpoints(data, [0, ...writingYears]);
+    const scale = buildTimelineScale(breakpoints);
 
     if (container) {
       const cy = createThemedGraph(container, data, {
@@ -98,15 +107,12 @@ const writingBands = range
         event: { colorVar: '--hub-graph-event', shape: 'star' },
       });
 
-      const range = getTimeRange(data);
-      if (range && rangeInput && yearLabel) {
-        rangeInput.min = String(range.min);
-        rangeInput.max = String(range.max);
-        rangeInput.value = String(range.min);
+      if (rangeInput && yearLabel) {
+        rangeInput.value = '0';
 
         const update = () => {
-          const year = Number(rangeInput.value);
-          const pct = yearToPercent(year, range);
+          const pct = Number(rangeInput.value);
+          const year = scale.toYear(pct);
           yearLabel.textContent = formatYear(year);
           applyTimeFilter(cy, data, year);
           // 드래그한 지점 왼쪽(이미 지나온 시점)은 구약/신약 색을 그대로 보여주고,
