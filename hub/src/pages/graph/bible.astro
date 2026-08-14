@@ -42,7 +42,12 @@ const writingBands = range
           <span class="era-marker-label">구약 ↔ 신약</span>
         </div>
       )}
-      <input id="year-range" type="range" step="1" />
+      <input
+        id="year-range"
+        type="range"
+        step="1"
+        style={eraMarkerPct !== null ? `--era-pct:${eraMarkerPct}%` : undefined}
+      />
     </div>
   </div>
 
@@ -190,8 +195,55 @@ const writingBands = range
     flex: 1;
   }
   #year-range {
+    -webkit-appearance: none;
+    appearance: none;
     width: 100%;
-    accent-color: var(--hub-graph-group);
+    height: 1.4rem;
+    background: transparent;
+    margin: 0;
+    /* --era-pct는 인라인 style로 페이지마다 지정(구약↔신약 전환점 위치) */
+    --era-pct: 100%;
+  }
+  #year-range::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(
+      to right,
+      var(--hub-graph-ot) 0%,
+      var(--hub-graph-ot) var(--era-pct),
+      var(--hub-graph-nt) var(--era-pct),
+      var(--hub-graph-nt) 100%
+    );
+  }
+  #year-range::-moz-range-track {
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(
+      to right,
+      var(--hub-graph-ot) 0%,
+      var(--hub-graph-ot) var(--era-pct),
+      var(--hub-graph-nt) var(--era-pct),
+      var(--hub-graph-nt) 100%
+    );
+  }
+  #year-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--hub-text);
+    border: 2px solid var(--hub-bg);
+    margin-top: -4px;
+    cursor: pointer;
+  }
+  #year-range::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--hub-text);
+    border: 2px solid var(--hub-bg);
+    cursor: pointer;
   }
   .era-marker {
     position: absolute;
