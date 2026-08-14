@@ -1,5 +1,5 @@
 {
-  "_comment": "연대는 학계·전통 사이에 이견이 있는 전통적 근사값(예: 출애굽 이른 연대설 vs 늦은 연대설, 사사기 각 사사의 정확한 재위 구간, 신약 사도들의 순교 연대, 창세기 초반 연대, 에스더·욥기처럼 연대 추정 자체가 불확실한 책 등)이며, 시간 바 기능을 보여주기 위한 데이터셋이다. 태초·아담·하와·에덴은 역사적 실측 연대가 없어, 전통적 연대기(예: 어셔 연대기)에서 흔히 쓰는 상징적 연도(기원전 4000년경)를 그대로 빌려와 노아(기원전 2900년경) 이전 구간을 채웠다 — 다른 항목보다 훨씬 더 근사적이라는 점을 전제로 한다. type은 인물(person)·집단(group, 왕국·제국 등)·지역(place, 지리적 장소)·사건(event, 각 권을 대표하는 단일 사건— 본문 전체가 아니라 그 책 하면 떠오르는 한 장면 하나만 골랐다)으로 나눴다. 다윗은 골리앗과의 결투(왕이 되기 전)까지 포함하도록 start를 왕이 된 시점보다 앞당겼다. 지역은 대체로 특정 시기에 국한되지 않으므로 start/end 없이 항상 표시되게 두었다. parent는 인물이 소속된 국가·집단이나 장소를 cytoscape의 compound node로 묶어 보여주기 위한 것인데, cytoscape는 부모 노드가 시간 필터로 display:none이 되면 자식이 display:element라도 화면에서 사라지므로, (1) 자기 활동 기간이 소속 집단의 존속 기간 안에 완전히 들어가는 인물, 또는 (2) 소속이 처음부터 항상 표시되는(start/end 없는) 장소·집단인 경우에만 parent를 지정했다 — 후자는 부모가 아예 안 사라지므로 항상 안전하다. 예루살렘처럼 기간이 없어 항상 표시돼야 하는 지역과, 예레미야·다니엘·키루스·헤롯처럼 활동 기간이 소속 집단의 존속 기간을 벗어나는 인물은 그래서 parent 없이 독립 노드로 뒀다. 로마-유대(judea-roman) 관계처럼 같은 두 대상이라도 시기에 따라 성격이 바뀌는 경우는, 하나의 엣지 라벨을 시간에 따라 바꾸는 대신 start/end가 다른 엣지 두 개(봉신국 → 직할 속주)를 두어 표현했다. 12사도는 개별 활동·순교 연대가 불확실해 예수와 동시대 인물로 보고 출생 연도를 대략 통일했다.",
+  "_comment": "연대는 학계·전통 사이에 이견이 있는 전통적 근사값(예: 출애굽 이른 연대설 vs 늦은 연대설, 사사기 각 사사의 정확한 재위 구간, 신약 사도들의 순교 연대, 창세기 초반 연대, 에스더·욥기처럼 연대 추정 자체가 불확실한 책 등)이며, 시간 바 기능을 보여주기 위한 데이터셋이다. 태초·아담·하와·에덴은 역사적 실측 연대가 없어, 전통적 연대기(예: 어셔 연대기)에서 흔히 쓰는 상징적 연도(기원전 4000년경)를 그대로 빌려와 노아(기원전 2900년경) 이전 구간을 채웠다 — 다른 항목보다 훨씬 더 근사적이라는 점을 전제로 한다. type은 인물(person)·집단(group, 왕국·제국 등)·지역(place, 지리적 장소)·사건(event, 각 권을 대표하는 단일 사건— 본문 전체가 아니라 그 책 하면 떠오르는 한 장면 하나만 골랐다)으로 나눴다. 다윗은 골리앗과의 결투(왕이 되기 전)까지 포함하도록 start를 왕이 된 시점보다 앞당겼다. 지역도 처음엔 늘 표시되게 뒀다가, 니느웨(요나 이전엔 등장할 이유가 없는 도시)가 창세기 시점부터 보이는 게 이상하다는 지적을 받고, 실제로 본문에서 그 장소를 언급하는 가장 이른 사건과 가장 늦은 사건 사이로 start/end를 다시 좁혔다 — 지리적으로는 그 전후에도 존재했겠지만, 이 그래프에서는 \"이야기에 등장하는 동안\"만 보여준다는 원칙을 지역에도 인물·집단과 똑같이 적용한 것이다. parent는 인물이 소속된 국가·집단이나 장소를 cytoscape의 compound node로 묶어 보여주기 위한 것인데, cytoscape는 부모 노드가 시간 필터로 display:none이 되면 자식이 display:element라도 화면에서 사라지므로, 자기 활동 기간이 소속 집단(장소 포함)의 존속 기간 안에 완전히 들어가는 경우에만 parent를 지정했다. 예루살렘처럼 소속 시키기엔 관계가 여러 갈래이거나, 예레미야·다니엘·키루스·헤롯처럼 활동 기간이 소속 집단의 존속 기간을 벗어나는 인물은 그래서 parent 없이 독립 노드로 뒀다. 로마-유대(judea-roman) 관계처럼 같은 두 대상이라도 시기에 따라 성격이 바뀌는 경우는, 하나의 엣지 라벨을 시간에 따라 바꾸는 대신 start/end가 다른 엣지 두 개(봉신국 → 직할 속주)를 두어 표현했다. 12사도는 개별 활동·순교 연대가 불확실해 예수와 동시대 인물로 보고 출생 연도를 대략 통일했다.",
   "nodes": [
     { "id": "genesis-creation", "label": "태초(천지창조)", "type": "event", "start": -4000, "end": -3970 },
     { "id": "adam", "label": "아담", "type": "person", "start": -4000, "end": -2895 },
@@ -19,9 +19,9 @@
     { "id": "jericho-fall", "label": "여리고 성 함락", "type": "event", "start": -1250, "end": -1249 },
     { "id": "deborah", "label": "드보라", "type": "person", "start": -1200, "end": -1150 },
     { "id": "deborah-victory", "label": "드보라와 바락의 승리", "type": "event", "start": -1180, "end": -1179 },
-    { "id": "ruth", "label": "룻", "type": "person", "start": -1150, "end": -1100 },
-    { "id": "boaz", "label": "보아스", "type": "person", "start": -1150, "end": -1100 },
-    { "id": "naomi", "label": "나오미", "type": "person", "start": -1160, "end": -1105 },
+    { "id": "ruth", "label": "룻", "type": "person", "start": -1150, "end": -1100, "parent": "bethlehem" },
+    { "id": "boaz", "label": "보아스", "type": "person", "start": -1150, "end": -1100, "parent": "bethlehem" },
+    { "id": "naomi", "label": "나오미", "type": "person", "start": -1160, "end": -1105, "parent": "bethlehem" },
     { "id": "gideon", "label": "기드온", "type": "person", "start": -1150, "end": -1100 },
     { "id": "samson", "label": "삼손", "type": "person", "start": -1100, "end": -1050 },
     { "id": "samuel", "label": "사무엘", "type": "person", "start": -1080, "end": -1010 },
@@ -84,16 +84,16 @@
     { "id": "rome", "label": "로마제국", "type": "group", "start": -63, "end": 476 },
     { "id": "judea-roman", "label": "유대(로마 지배기)", "type": "group", "start": -37, "end": 100 },
 
-    { "id": "canaan", "label": "가나안", "type": "place" },
-    { "id": "egypt", "label": "애굽(이집트)", "type": "place" },
-    { "id": "jerusalem", "label": "예루살렘", "type": "place" },
+    { "id": "canaan", "label": "가나안", "type": "place", "start": -2000, "end": -1050 },
+    { "id": "egypt", "label": "애굽(이집트)", "type": "place", "start": -1750, "end": -570 },
+    { "id": "jerusalem", "label": "예루살렘", "type": "place", "start": -1030, "end": 31 },
     { "id": "eden", "label": "에덴동산", "type": "place", "start": -4000, "end": -3970 },
-    { "id": "sinai", "label": "시내산", "type": "place" },
-    { "id": "jericho", "label": "여리고", "type": "place" },
-    { "id": "bethlehem", "label": "베들레헴", "type": "place" },
-    { "id": "carmel", "label": "갈멜산", "type": "place" },
-    { "id": "nineveh", "label": "니느웨", "type": "place" },
-    { "id": "patmos", "label": "밧모섬", "type": "place" }
+    { "id": "sinai", "label": "시내산", "type": "place", "start": -1350, "end": -1230 },
+    { "id": "jericho", "label": "여리고", "type": "place", "start": -1300, "end": -1210 },
+    { "id": "bethlehem", "label": "베들레헴", "type": "place", "start": -1160, "end": -1100 },
+    { "id": "carmel", "label": "갈멜산", "type": "place", "start": -870, "end": -845 },
+    { "id": "nineveh", "label": "니느웨", "type": "place", "start": -780, "end": -750 },
+    { "id": "patmos", "label": "밧모섬", "type": "place", "start": 90, "end": 100 }
   ],
   "edges": [
     { "source": "genesis-creation", "target": "adam", "label": "창조" },
