@@ -144,5 +144,8 @@ cd hub && npm run dev      # 허브만
 
 ## 허브(`hub/`) 관련 메모
 
-- 관계도 그래프(`hub/src/pages/graph.astro`)는 Cytoscape.js 기반이며, 데이터(`hub/src/data/graph-data.json`)는 현재 구조 확인용 더미다. 500편에서 인물·기업·관계를 실제로 추출해 채우는 작업은 별도 진행 예정 — 스키마는 `{ nodes: [{id, label, type: "person"|"company"}], edges: [{source, target, label}] }`를 따른다.
-- `hub/`는 의도적으로 가볍게 유지한다 — React 등 UI 프레임워크 추가 없이 Astro + Cytoscape.js만 사용.
+- 관계도는 하나가 아니라 여러 개다 — `/graph`는 목록 페이지(`hub/src/pages/graph/index.astro`)이고, 각 그래프는 `/graph/<이름>`(예: `/graph/blog/`)으로 독립된 엔드포인트를 갖는다. 새 관계도를 추가할 땐 이 라우팅 관례를 따를 것.
+- 테마 대응 Cytoscape 렌더링 로직은 `hub/src/lib/cytoscape-theme.ts`(`createThemedGraph`)에 공용화돼 있다 — Cytoscape는 캔버스에 직접 그려 CSS 변수를 못 읽으므로, 이 함수가 테마 토큰을 실제 색상값으로 읽어 스타일을 구성하고 `theme-change` 이벤트(토글 클릭·다른 탭의 storage 이벤트)에 맞춰 다시 칠한다. 새 그래프를 추가할 땐 이 함수를 재사용하고, 데이터 타입은 `hub/src/lib/graph-types.ts`의 `GraphNode`/`GraphEdge`/`GraphData`(`type`은 도메인에 고정되지 않은 `string`)를 따른다.
+- 블로그 관계도(`hub/src/pages/graph/blog.astro`)는 500편에서 인물·기업·관계를 추출한 실제 데이터가 아직 없는 더미(`hub/src/data/blog-graph.json`)다 — 추출 작업은 별도 진행 예정.
+- 성경 관계도는 시대별로 인물·왕국이 나타나고 사라지는 "시간 바" 레이어가 필요해 다른 그래프보다 요구사항이 복잡하다 — 노드/엣지에 연도(또는 시대) 필드를 추가하고 슬라이더 값에 따라 `cy.elements()`를 필터링/투명도 조절하는 식으로 지금의 Cytoscape.js 위에서 구현하는 게 1차 방향이며, 정말 감당 못 하는 부분이 확인되면 그때 별도 엔진을 검토한다. 데이터·시간 바 UI 모두 아직 미착수.
+- `hub/`는 의도적으로 가볍게 유지한다 — React 등 UI 프레임워크 추가 없이 Astro + Cytoscape.js만 사용. 새 코드는 TypeScript로 작성하는 걸 기본으로 한다(`tsconfig.json`이 `astro/tsconfigs/strict` 적용 중).

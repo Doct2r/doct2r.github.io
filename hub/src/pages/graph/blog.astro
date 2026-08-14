@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import graphData from '../../data/blog-graph.json';
+---
+<Base title="블로그 관계도 — Doct2r" description="블로그에 등장한 인물·기업 관계 그래프 (더미 데이터)">
+  <header>
+    <a href="/graph" class="back">← 관계도 목록</a>
+    <h1>블로그 관계도</h1>
+    <p class="notice">
+      지금은 구조 확인용 더미 데이터입니다. 실제 500편에서 인물·기업·관계를 추출하는 작업은 별도로 진행됩니다.
+    </p>
+  </header>
+  <div id="cy"></div>
+  <ul class="legend">
+    <li><span class="dot person"></span> 인물</li>
+    <li><span class="dot company"></span> 기업</li>
+  </ul>
+
+  <script is:inline type="application/json" id="graph-data" set:html={JSON.stringify(graphData)} />
+
+  <script>
+    import { createThemedGraph } from '../../lib/cytoscape-theme';
+    import type { GraphData } from '../../lib/graph-types';
+
+    const raw = document.getElementById('graph-data')?.textContent ?? '{"nodes":[],"edges":[]}';
+    const data = JSON.parse(raw) as GraphData;
+    const container = document.getElementById('cy');
+
+    if (container) {
+      createThemedGraph(container, data, {
+        person: '--hub-graph-person',
+        company: '--hub-graph-company',
+      });
+    }
+  </script>
+</Base>
+
+<style>
+  header {
+    padding: 1.5rem 2rem 0.5rem;
+  }
+  .back {
+    color: var(--hub-text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  h1 {
+    margin: 0.5rem 0 0.25rem;
+  }
+  .notice {
+    color: var(--hub-text-muted);
+    font-size: 0.85rem;
+    max-width: 640px;
+  }
+  #cy {
+    width: 100%;
+    height: 70vh;
+    background: var(--hub-bg);
+  }
+  .legend {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.5rem 2rem 1.5rem;
+    margin: 0;
+    font-size: 0.85rem;
+  }
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 0.4rem;
+  }
+  .dot.person {
+    background: var(--hub-graph-person);
+  }
+  .dot.company {
+    background: var(--hub-graph-company);
+    border-radius: 2px;
+  }
+</style>
