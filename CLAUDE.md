@@ -149,3 +149,5 @@ cd hub && npm run dev      # 허브만
 - 블로그 관계도(`hub/src/pages/graph/blog.astro`)는 500편에서 인물·기업·관계를 추출한 실제 데이터가 아직 없는 더미(`hub/src/data/blog-graph.json`)다 — 추출 작업은 별도 진행 예정.
 - 성경 관계도는 시대별로 인물·왕국이 나타나고 사라지는 "시간 바" 레이어가 필요해 다른 그래프보다 요구사항이 복잡하다 — 노드/엣지에 연도(또는 시대) 필드를 추가하고 슬라이더 값에 따라 `cy.elements()`를 필터링/투명도 조절하는 식으로 지금의 Cytoscape.js 위에서 구현하는 게 1차 방향이며, 정말 감당 못 하는 부분이 확인되면 그때 별도 엔진을 검토한다. 데이터·시간 바 UI 모두 아직 미착수.
 - `hub/`는 의도적으로 가볍게 유지한다 — React 등 UI 프레임워크 추가 없이 Astro + Cytoscape.js만 사용. 새 코드는 TypeScript로 작성하는 걸 기본으로 한다(`tsconfig.json`이 `astro/tsconfigs/strict` 적용 중).
+- 테마 토큰에 accent 컬러 `--hub-accent-rgb`/`--hub-accent2-rgb`(라이트·다크 각각, `hub/src/layouts/Base.astro`)가 있다 — 그래프 페이지의 company/event 색과 톤을 맞춘 teal·gold 계열. RGB 트리플렛으로 저장해 `rgba(var(--hub-accent-rgb), 0.2)` 식으로 투명도를 줄 수 있게 한 것이니, 새 accent가 필요하면 이 형식을 따를 것.
+- 히어로(`hub/src/pages/index.astro`)에는 타이핑 롤 로테이터 + 마우스 반응형 그라디언트 메시가 있다 — 프레임워크 없이 바닐라 `<script>`로 구현했고, `prefers-reduced-motion`을 항상 존중해 애니메이션을 끄고 정적 텍스트로 대체한다(스크린리더용 완성 문장은 `.sr-only`로 별도 제공). 이 페이지에 동적 요소를 더 추가할 때도 같은 패턴(모션 감산 대응 + 접근성 텍스트 분리)을 따를 것.
