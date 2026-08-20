@@ -5,39 +5,206 @@ const links = [
   { href: '/blog/', title: '블로그', desc: '기술과 생각을 정리하는 500편+의 글' },
   { href: '/graph', title: '관계도', desc: '블로그·성경 등 여러 관계도 모음' },
 ];
+
+const roles = ['기획하는', '개발하는', 'UI/UX를 다듬는'];
 ---
 <Base title="Doct2r" description="Doct2r의 홈 — 블로그와 관계도 그래프로 이어지는 허브">
   <main class="hero">
-    <h1>Doct2r</h1>
-    <p class="tagline">기술과 생각을 기록하고, 그 기록들이 서로 어떻게 얽혀 있는지 들여다봅니다.</p>
-    <nav class="cards">
-      {links.map((l) => (
-        <a class="card" href={l.href}>
-          <span class="card-title">{l.title}</span>
-          <span class="card-desc">{l.desc}</span>
-        </a>
-      ))}
-    </nav>
+    <div class="mesh" aria-hidden="true">
+      <span class="blob blob-a"></span>
+      <span class="blob blob-b"></span>
+      <span class="spotlight"></span>
+    </div>
+    <div class="hero-content">
+      <h1>Doct2r</h1>
+      <p class="roles" aria-hidden="true">저는 <span id="role-word">{roles[0]}</span> 사람입니다.</p>
+      <p class="sr-only">저는 {roles.join(', ')} 사람입니다.</p>
+      <p class="tagline">기술과 생각을 기록하고, 그 기록들이 서로 어떻게 얽혀 있는지 들여다봅니다.</p>
+      <nav class="cards">
+        {links.map((l) => (
+          <a class="card" href={l.href}>
+            <span class="card-title">{l.title}</span>
+            <span class="card-desc">{l.desc}</span>
+          </a>
+        ))}
+      </nav>
+    </div>
   </main>
 </Base>
 
+<script define:vars={{ roles }}>
+  (function () {
+    const el = document.getElementById('role-word');
+    if (!el) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      el.textContent = roles.join(' · ');
+      return;
+    }
+
+    const TYPE_MS = 90;
+    const DELETE_MS = 45;
+    const HOLD_MS = 1400;
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    el.textContent = '';
+
+    function tick() {
+      const current = roles[phraseIndex];
+      if (!deleting) {
+        charIndex++;
+        el.textContent = current.slice(0, charIndex);
+        if (charIndex === current.length) {
+          setTimeout(() => {
+            deleting = true;
+            tick();
+          }, HOLD_MS);
+          return;
+        }
+        setTimeout(tick, TYPE_MS);
+      } else {
+        charIndex--;
+        el.textContent = current.slice(0, charIndex);
+        if (charIndex === 0) {
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % roles.length;
+          setTimeout(tick, TYPE_MS);
+          return;
+        }
+        setTimeout(tick, DELETE_MS);
+      }
+    }
+
+    tick();
+  })();
+
+  (function () {
+    const hero = document.querySelector('.hero');
+    if (!hero || !window.matchMedia('(pointer: fine)').matches) return;
+    hero.addEventListener('pointermove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      hero.style.setProperty('--mx', x + '%');
+      hero.style.setProperty('--my', y + '%');
+    });
+  })();
+</script>
+
 <style>
   .hero {
+    position: relative;
+    overflow: hidden;
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 640px;
-    margin: 0 auto;
     padding: 2rem;
-    text-align: center;
     box-sizing: border-box;
   }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* 배경 메시 — 은은한 두 블롭이 천천히 떠다니고, 마우스를 따라 스포트라이트가 겹친다 */
+  .mesh {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .blob {
+    position: absolute;
+    width: 55vmax;
+    height: 55vmax;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.22;
+  }
+  .blob-a {
+    top: -20%;
+    left: -12%;
+    background: rgb(var(--hub-accent-rgb));
+  }
+  .blob-b {
+    bottom: -25%;
+    right: -15%;
+    background: rgb(var(--hub-accent2-rgb));
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .blob-a {
+      animation: drift-a 20s ease-in-out infinite;
+    }
+    .blob-b {
+      animation: drift-b 24s ease-in-out infinite;
+    }
+  }
+  @keyframes drift-a {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(6%, 8%); }
+  }
+  @keyframes drift-b {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-8%, -6%); }
+  }
+  .spotlight {
+    position: absolute;
+    left: var(--mx, 50%);
+    top: var(--my, 30%);
+    width: 40vmax;
+    height: 40vmax;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(var(--hub-accent-rgb), 0.28), transparent 70%);
+    transition: left 0.3s ease-out, top 0.3s ease-out;
+  }
+
   h1 {
     font-size: 3rem;
     margin: 0 0 0.5rem;
     letter-spacing: -0.02em;
+  }
+  .roles {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+    min-height: 1.6em;
+  }
+  .roles #role-word {
+    color: rgb(var(--hub-accent-rgb));
+  }
+  .roles #role-word::after {
+    content: '|';
+    margin-left: 2px;
+    color: rgb(var(--hub-accent-rgb));
+    animation: blink 1s step-end infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .roles #role-word::after {
+      display: none;
+    }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
   .tagline {
     color: var(--hub-text-muted);
