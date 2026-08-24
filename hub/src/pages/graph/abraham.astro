@@ -1,0 +1,118 @@
+---
+import Base from '../../layouts/Base.astro';
+import graphData from '../../data/abraham-graph.json';
+---
+<Base title="아브라함의 족보 — Doct2r" description="데라부터 이스라엘 12지파까지, 창세기 족보를 잇는 관계도">
+  <header>
+    <a href="/graph" class="back">← 관계도 목록</a>
+    <h1>아브라함의 족보</h1>
+    <p class="notice">
+      창세기 11장(데라)부터 35장(야곱의 열두 아들)까지, 대를 잇는 흐름 그대로 그렸습니다.
+      이스마엘의 12아들처럼 이후 본문에 다시 등장하지 않는 방계 후손은 생략했습니다.
+    </p>
+  </header>
+  <div class="graph-wrap">
+    <div id="cy"></div>
+  </div>
+  <ul class="legend">
+    <li><span class="dot person"></span> 인물</li>
+    <li><span class="dot group"></span> 지파·족속(민족의 시작점)</li>
+  </ul>
+
+  <script is:inline type="application/json" id="graph-data" set:html={JSON.stringify(graphData)} />
+
+  <script>
+    import { createThemedGraph, createZoomControls } from '../../lib/cytoscape-theme';
+    import type { GraphData } from '../../lib/graph-types';
+
+    const raw = document.getElementById('graph-data')?.textContent ?? '{"nodes":[],"edges":[]}';
+    const data = JSON.parse(raw) as GraphData;
+    const wrapper = document.querySelector('.graph-wrap') as HTMLElement | null;
+    const container = document.getElementById('cy');
+
+    if (container) {
+      // 족보는 세대를 따라 위→아래로 쭉 이어지는 게 핵심이라, 다른 그래프의 fcose(힘 기반 분산)
+      // 대신 세대 깊이를 그대로 층으로 쌓는 breadthfirst(트리) 레이아웃을 쓴다. 배우자/첩 엣지도
+      // 방향이 있어 트리 순회에 걸리므로, 배우자는 대체로 자녀와 같은 층 근처에 놓인다.
+      const cy = createThemedGraph(container, data, {
+        person: { colorVar: '--hub-graph-person' },
+        group: { colorVar: '--hub-graph-group', shape: 'round-rectangle' },
+      }, {
+        layout: {
+          name: 'breadthfirst',
+          directed: true,
+          roots: ['terah'],
+          spacingFactor: 1.35,
+          padding: 40,
+          animate: false,
+        },
+      });
+      if (wrapper) {
+        createZoomControls(wrapper, cy, () => cy.elements());
+      }
+    }
+  </script>
+</Base>
+
+<style>
+  header {
+    padding: 1.5rem 2rem 0.5rem;
+  }
+  .back {
+    color: var(--hub-text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  h1 {
+    margin: 0.5rem 0 0.25rem;
+  }
+  .notice {
+    color: var(--hub-text-muted);
+    font-size: 0.85rem;
+    max-width: 640px;
+  }
+  .graph-wrap {
+    position: relative;
+  }
+  #cy {
+    width: 100%;
+    height: 70vh;
+    background: var(--hub-bg);
+    touch-action: none;
+  }
+  .legend {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.5rem 2rem 1.5rem;
+    margin: 0;
+    font-size: 0.85rem;
+  }
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 0.4rem;
+  }
+  .dot.person {
+    background: var(--hub-graph-person);
+  }
+  .dot.group {
+    background: var(--hub-graph-group);
+    border-radius: 2px;
+  }
+
+  @media (max-width: 640px) {
+    header {
+      padding: 1rem 1rem 0.5rem;
+    }
+    #cy {
+      height: 60vh;
+    }
+    .legend {
+      padding: 0.5rem 1rem 1.25rem;
+      flex-wrap: wrap;
+    }
+  }
+</style>
